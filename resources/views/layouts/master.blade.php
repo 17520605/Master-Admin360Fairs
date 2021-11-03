@@ -1,16 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    @include('components.header')
-    <body id="page-top">
-        <div id="wrapper">
-            @include('components.navbar-left')
-            <div id="content-wrapper" class="d-flex flex-column">
-                <div id="content">
-                    @include('components.navbar-top')
-                    @yield('content')
-                </div>
-                @include('components.footer')
-            </div>
+@include('components.header')
+<body class="theme-blue">
+    @include('components.page-loader')
+    <div id="wrapper">
+        @include('components.navbar-top')
+        @include('components.navbar-left')
+        <div id="main-content">
+            @yield('content')
         </div>
-    </body>
+    </div>
+    @include('components.footer')
+</body>
+
 </html>
