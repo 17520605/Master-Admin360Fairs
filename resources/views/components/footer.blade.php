@@ -29,4 +29,4 @@
 
     <script src="{{ asset('asset/js/index2.js')}}"></script>
     <script src="{{ asset('asset/js/index.js')}}"></script>
-    <script src="{{ asset('asset/js/dialogs.js')}}"></script>
+    {{-- <script src="{{ asset('asset/js/dialogs.js')}}"></script> --}}

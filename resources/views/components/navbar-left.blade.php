@@ -1,16 +1,16 @@
         <div id="left-sidebar" class="sidebar">
             <div class="sidebar-scroll">
                 <div class="user-account">
-                    <img src="https://wrraptheme.com/templates/lucid/hr/html/assets/images/user.png" class="rounded-circle user-photo" alt="User Profile Picture">
+                    <img src="{{ $profile->avatar != null ? $profile->avatar : 'https://res.cloudinary.com/virtual-tour/image/upload/v1634539139/icons/default_avatar_k3wxez.png' }}" class="rounded-circle user-photo" alt="User Profile Picture">
                     <div class="dropdown">
                         <span>Welcome,</span>
-                        <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>Jessica Doe</strong></a>
+                        <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{ $profile->avatar }}</strong></a>
                         <ul class="dropdown-menu dropdown-menu-right account animated flipInY">
                             <li><a href="page-profile2.html"><i class="icon-user"></i>My Profile</a></li>
                             <li><a href="app-inbox.html"><i class="icon-envelope-open"></i>Messages</a></li>
                             <li><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>
                             <li class="divider"></li>
-                            <li><a href="page-login.html"><i class="icon-power"></i>Logout</a></li>
+                            <li><a href="/logout"><i class="icon-power"></i>Logout</a></li>
                         </ul>
                     </div>
                     <hr>
@@ -45,25 +45,8 @@
                                 <li class="active"><a href="index.html"><i class="icon-speedometer"></i><span>HR Dashboard</span></a></li>
                                 <li><a href="app-holidays.html"><i class="icon-list"></i>Holidays</a></li>
                                 <li><a href="app-events.html"><i class="icon-calendar"></i>Events</a></li>
-                                <li><a href="app-activities.html"><i class="icon-badge"></i>Activities</a></li>
-                                <li><a href="app-social.html"><i class="icon-globe"></i>HR Social</a></li>
-                                <li>
-                                    <a href="#Employees" class="has-arrow"><i class="icon-users"></i><span>Employees</span></a>
-                                    <ul>
-                                        <li><a href="emp-all.html">All Employees</a></li>
-                                        <li><a href="emp-leave.html">Leave Requests</a></li>
-                                        <li><a href="emp-attendance.html">Attendance</a></li>
-                                        <li><a href="emp-departments.html">Departments</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#Accounts" class="has-arrow"><i class="icon-briefcase"></i><span>Accounts</span></a>
-                                    <ul>
-                                        <li><a href="acc-payments.html">Payments</a></li>
-                                        <li><a href="acc-expenses.html">Expenses</a></li>
-                                        <li><a href="acc-invoices.html">Invoices</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="/users"><i class="icon-user"></i>Users</a></li>
+                                <li> <a href="#Employees"><i class="icon-users"></i><span>Client</span></a></li>
                                 <li>
                                     <a href="#Payroll" class="has-arrow"><i class="icon-credit-card"></i><span>Payroll</span></a>
                                     <ul>
@@ -71,14 +54,7 @@
                                         <li><a href="payroll-salary.html">Employee Salary</a></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="#Report" class="has-arrow"><i class="icon-bar-chart"></i><span>Report</span></a>
-                                    <ul>
-                                        <li><a href="report-expense.html">Expense Report</a></li>
-                                        <li><a href="report-invoice.html">Invoice Report</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="app-users.html"><i class="icon-user"></i>Users</a></li>
+                                
                                 <li>
                                     <a href="#Authentication" class="has-arrow"><i class="icon-lock"></i><span>Authentication</span></a>
                                     <ul>

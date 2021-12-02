@@ -1,39 +1,35 @@
-@extends('layouts.master')
+@extends('layouts.login-master')
 @section('content')
-    <div class="vertical-align-wrap">
-        <div class="vertical-align-middle auth-main">
-            <div class="auth-box">
-                <div class="top">
-                    <img src="../assets/images/logo-white.svg" alt="Lucid">
-                </div>
-                <div class="card">
-                    <div class="header">
-                        <p class="lead">Login to your account</p>
+    <div class="container" style="display: flex ;justify-content: center;align-items: center;height: 100vh;">
+        <div class="card" style="width: 40%;">
+            <div class="header">
+                <p class="lead h1 font-weight-bold text-center">Login to your account</p>
+            </div>
+            <div class="body">
+                <form class="form-auth-small user" method="POST" action="{{env('APP_URL')}}/login">
+                    @csrf
+                    <input type="hidden" name="url" value="{{isset($url) ? $url : ''}}">
+                    <div class="form-group">
+                        
+                        <label for="email" class="control-label sr-only">Email</label>
+                        <input type="email" name="email" class="form-control" id="email" value="{{isset($email) ? $email : ''}}" placeholder="Email">
                     </div>
-                    <div class="body">
-                        <form class="form-auth-small" action="index.html">
-                            <div class="form-group">
-                                <label for="signin-email" class="control-label sr-only">Email</label>
-                                <input type="email" class="form-control" id="signin-email" value="user@domain.com" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <label for="signin-password" class="control-label sr-only">Password</label>
-                                <input type="password" class="form-control" id="signin-password" value="thisisthepassword" placeholder="Password">
-                            </div>
-                            <div class="form-group clearfix">
-                                <label class="fancy-checkbox element-left">
-                                    <input type="checkbox">
-                                    <span>Remember me</span>
-                                </label>								
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
-                            <div class="bottom">
-                                <span class="helper-text m-b-10"><i class="fa fa-lock"></i> <a href="page-forgot-password.html">Forgot password?</a></span>
-                                <span>Don't have an account? <a href="page-register.html">Register</a></span>
-                            </div>
-                        </form>
+                    <div class="form-group">
+                        <label for="password" class="control-label sr-only">Password</label>
+                        <input type="password" name="password" class="form-control" id="password" value="" placeholder="Password">
                     </div>
-                </div>
+                    {{-- <div class="form-group clearfix">
+                        <label class="fancy-checkbox element-left">
+                            <input type="checkbox">
+                            <span>Remember me</span>
+                        </label>								
+                    </div> --}}
+                    <button type="submit" class="btn btn-primary btn-lg btn-block mb-3">LOGIN</button>
+                    <div class="bottom">
+                        <span class="helper-text m-b-10"><i class="fa fa-lock"></i> <a href="page-forgot-password.html">Forgot password?</a></span>
+                        <span>Don't have an account? <a href="page-register.html">Register</a></span>
+                    </div>
+                </form>
             </div>
         </div>
 	</div>

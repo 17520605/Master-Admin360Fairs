@@ -50,8 +50,8 @@
                             <table class="table table-hover js-basic-example dataTable table-custom m-b-0">
                                 <thead>
                                     <tr>                                        
-                                        <th>Name</th>
                                         <th></th>
+                                        <th>Name</th>
                                         <th></th>
                                         <th>Created Date</th>
                                         <th>Role</th>
@@ -59,85 +59,40 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="width45">
-                                            <img src="https://wrraptheme.com/templates/lucid/hr/html/assets/images/xs/avatar1.jpg" class="rounded-circle width35" alt="">
-                                        </td>
-                                        <td>
-                                            <h6 class="mb-0">Marshall Nichols</h6>
-                                            <span>marshall-n@gmail.com</span>
-                                        </td>
-                                        <td><span class="badge badge-danger">Super Admin</span></td>
-                                        <td>24 Jun, 2015</td>
-                                        <td>CEO and Founder</td>
-                                        <td>
-                                            
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="https://wrraptheme.com/templates/lucid/hr/html/assets/images/xs/avatar2.jpg" class="rounded-circle width35" alt="">
-                                        </td>
-                                        <td>
-                                            <h6 class="mb-0">Susie Willis</h6>
-                                            <span>sussie-w@gmail.com</span>
-                                        </td>
-                                        <td><span class="badge badge-info">Admin</span></td>
-                                        <td>28 Jun, 2015</td>
-                                        <td>Team Lead</td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit"></i></button>
-                                            <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="https://wrraptheme.com/templates/lucid/hr/html/assets/images/xs/avatar3.jpg" class="rounded-circle width35" alt="">
-                                        </td>
-                                        <td>
-                                            <h6 class="mb-0">Debra Stewart</h6>
-                                            <span>debra@gmail.com</span>
-                                        </td>
-                                        <td><span class="badge badge-info">Admin</span></td>
-                                        <td>21 July, 2015</td>
-                                        <td>Team Lead</td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit"></i></button>
-                                            <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="https://wrraptheme.com/templates/lucid/hr/html/assets/images/xs/avatar4.jpg" class="rounded-circle width35" alt="">
-                                        </td>
-                                        <td>
-                                            <h6 class="mb-0">Erin Gonzales</h6>
-                                            <span>Erinonzales@gmail.com</span>
-                                        </td>
-                                        <td><span class="badge badge-default">Employee</span></td>
-                                        <td>21 July, 2015</td>
-                                        <td>Web Developer</td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit"></i></button>
-                                            <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="https://wrraptheme.com/templates/lucid/hr/html/assets/images/xs/avatar3.jpg" class="rounded-circle width35" alt="">
-                                        </td>
-                                        <td>
-                                            <h6 class="mb-0">Ava Alexander</h6>
-                                            <span>alexander@gmail.com</span>
-                                        </td>
-                                        <td><span class="badge badge-success">HR Admin</span></td>
-                                        <td>21 July, 2015</td>
-                                        <td>HR</td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit"></i></button>
-                                            <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o"></i></button>
-                                        </td>
-                                    </tr>
+                                    @foreach ($users as $user)
+                                        <tr>
+                                            <td class="width45">
+                                                <img src="{{ $user->profile->avatar != null ? $user->profile->avatar : 'https://res.cloudinary.com/virtual-tour/image/upload/v1634539139/icons/default_avatar_k3wxez.png' }}" class="rounded-circle width35" alt="">
+                                            </td>
+                                            <td>
+                                                <h6 class="mb-0">{{$user->profile->name}}</h6>
+                                                <span>{{$user->profile->email}}</span>
+                                            </td>
+                                            <td>
+                                                @if ($user->type == 'superadmin')
+                                                    <span class="badge badge-danger">Super Admin</span>
+                                                @elseif ($user->type == 'masteradmin')
+                                                    <span class="badge badge-info">Admin</span>
+                                                @endif
+                                            </td>
+                                            <td>{{$user->profile->updated_at}}</td>
+                                            <td>
+                                                @if ($user->type == 'superadmin')
+                                                    CEO and Founder
+                                                @elseif ($user->type == 'masteradmin')
+                                                    Managerment
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($user->type == 'superadmin')
+                                                
+                                                @elseif ($user->type == 'masteradmin')
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o"></i></button>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -147,170 +102,55 @@
         </div>
     </div>
     <div class="modal animated fadeIn" id="add_user" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="title" id="defaultModalLabel">Add User</h6>
+                    <h5 class="title" id="defaultModalLabel">Add User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline: none">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="modal-body">
-                    <div class="row clearfix">
-                        <div class="col-md-4 col-sm-12">
-                            <div class="form-group">                                    
-                                <input type="text" class="form-control" placeholder="First Name *">
+                <form action="/users/save-create" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <div class="form-group">            
+                                    <label for="tour_name" class="form-control-label">Full Name *</label>               
+                                    <input type="text" name="name" class="form-control" placeholder="Name Managerment">
+                                </div>
+                            </div>    
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="tour_name" class="form-control-label">Phone *</label>                                      
+                                    <input type="tel" name="contact" class="form-control" placeholder="Phone">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <div class="form-group">                                    
-                                <input type="text" class="form-control" placeholder="Last Name">
+                            <div class="col-sm-12">
+                                <div class="form-group"> 
+                                    <label for="tour_name" class="form-control-label">Email *</label>                                     
+                                    <input type="email" name="email" class="form-control" placeholder="Email">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <div class="form-group">                                    
-                                <input type="text" class="form-control" placeholder="Email ID *">
-                            </div>
-                        </div>    
-                        <div class="col-md-4 col-sm-12">
-                            <div class="form-group">                                   
-                                <input type="text" class="form-control" placeholder="Username *">
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <div class="form-group">                                    
-                                <input type="text" class="form-control" placeholder="Password">
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <div class="form-group">                                    
-                                <input type="text" class="form-control" placeholder="Confirm Password">
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <div class="form-group">                                    
-                                <input type="text" class="form-control" placeholder="Mobile No">
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <div class="form-group">
-                                <select class="form-control show-tick">
-                                    <option>Select Role Type</option>
-                                    <option>Super Admin</option>
-                                    <option>Admin</option>
-                                    <option>Employee</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <div class="form-group">                                    
-                                <input type="text" class="form-control" placeholder="Employee ID *">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <h6>Module Permission</h6>
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Read</th>
-                                            <th>Write</th>
-                                            <th>Delete</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Super Admin</td>
-                                            <td>
-                                                <label class="fancy-checkbox">
-                                                    <input class="checkbox-tick" type="checkbox" name="checkbox" checked>
-                                                    <span></span>
-                                                </label>
-                                            </td>
-                                            <td>
-                                                <label class="fancy-checkbox">
-                                                    <input class="checkbox-tick" type="checkbox" name="checkbox" checked>
-                                                    <span></span>
-                                                </label>
-                                            </td>
-                                            <td>
-                                                <label class="fancy-checkbox">
-                                                    <input class="checkbox-tick" type="checkbox" name="checkbox" checked>
-                                                    <span></span>
-                                                </label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Admin</td>
-                                            <td>
-                                                <label class="fancy-checkbox">
-                                                    <input class="checkbox-tick" type="checkbox" name="checkbox" checked>
-                                                    <span></span>
-                                                </label>
-                                            </td>
-                                            <td>
-                                                <label class="fancy-checkbox">
-                                                    <input class="checkbox-tick" type="checkbox" name="checkbox" checked>
-                                                    <span></span>
-                                                </label>
-                                            </td>
-                                            <td>
-                                                <label class="fancy-checkbox">
-                                                    <input class="checkbox-tick" type="checkbox" name="checkbox">
-                                                    <span></span>
-                                                </label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Employee</td>
-                                            <td>
-                                                <label class="fancy-checkbox">
-                                                    <input class="checkbox-tick" type="checkbox" name="checkbox" checked>
-                                                    <span></span>
-                                                </label>
-                                            </td>
-                                            <td>
-                                                <label class="fancy-checkbox">
-                                                    <input class="checkbox-tick" type="checkbox" name="checkbox">
-                                                    <span></span>
-                                                </label>
-                                            </td>
-                                            <td>
-                                                <label class="fancy-checkbox">
-                                                    <input class="checkbox-tick" type="checkbox" name="checkbox">
-                                                    <span></span>
-                                                </label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>HR Admin</td>
-                                            <td>
-                                                <label class="fancy-checkbox">
-                                                    <input class="checkbox-tick" type="checkbox" name="checkbox" checked>
-                                                    <span></span>
-                                                </label>
-                                            </td>
-                                            <td>
-                                                <label class="fancy-checkbox">
-                                                    <input class="checkbox-tick" type="checkbox" name="checkbox" checked>
-                                                    <span></span>
-                                                </label>
-                                            </td>
-                                            <td>
-                                                <label class="fancy-checkbox">
-                                                    <input class="checkbox-tick" type="checkbox" name="checkbox">
-                                                    <span></span>
-                                                </label>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="col-sm-12">
+                                <div class="form-group">    
+                                    <label for="tour_name" class="form-control-label">Type Account *</label>                                   
+                                    <select class="form-control" name="type">
+                                        <option>Select Role Type</option>
+                                        <option value="superadmin">Superadmin</option>
+                                        <option value="masteradmin">Admin</option>
+                                        <option value="HR" disabled>HR</option>
+                                        <option value="employee" disabled>Employee</option>
+                                        <option value="sale" disabled>Sale</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Add</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
