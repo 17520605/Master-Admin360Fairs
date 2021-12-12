@@ -1,5 +1,6 @@
 @extends('layouts.login-master')
 @section('content')
+  
     <div class="container" style="display: flex ;justify-content: center;align-items: center;height: 100vh;">
         <div class="card" style="width: 40%;">
             <div class="header">
@@ -12,11 +13,11 @@
                     <div class="form-group">
                         
                         <label for="email" class="control-label sr-only">Email</label>
-                        <input type="email" name="email" class="form-control" id="email" value="{{isset($email) ? $email : ''}}" placeholder="Email">
+                        <input type="email" name="email" class="form-control" id="email" value="{{isset($email) ? $email : ''}}" placeholder="Email" required>
                     </div>
                     <div class="form-group">
                         <label for="password" class="control-label sr-only">Password</label>
-                        <input type="password" name="password" class="form-control" id="password" value="" placeholder="Password">
+                        <input type="password" name="password" class="form-control" id="password" value="" placeholder="Password" required>
                     </div>
                     {{-- <div class="form-group clearfix">
                         <label class="fancy-checkbox element-left">
@@ -25,6 +26,9 @@
                         </label>								
                     </div> --}}
                     <button type="submit" class="btn btn-primary btn-lg btn-block mb-3">LOGIN</button>
+                    @if($notif != null || $notif != '')
+                        <section class='alert alert-danger text-center'>{{$notif}}</section>
+                    @endif
                     <div class="bottom">
                         <span class="helper-text m-b-10"><i class="fa fa-lock"></i> <a href="page-forgot-password.html">Forgot password?</a></span>
                         <span>Don't have an account? <a href="page-register.html">Register</a></span>

@@ -1,13 +1,15 @@
 @extends('layouts.master')
 @section('content')
+
     <div class="container-fluid">
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-6 col-md-8 col-sm-12">
-                    <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a>Users</h2>
+                    <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Employee List</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
-                        <li class="breadcrumb-item active">Users</li>
+                        <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>                            
+                        <li class="breadcrumb-item">Employee</li>
+                        <li class="breadcrumb-item active">Employee List</li>
                     </ul>
                 </div>            
                 <div class="col-lg-6 col-md-4 col-sm-12 text-right">
@@ -35,59 +37,51 @@
                 </div>
             </div>
         </div>
+
         <div class="row clearfix">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="header">
-                        <h2>List</h2>
-                        <ul class="header-dropdown">
-                            <li><a href="javascript:void(0);" class="btn btn-info" data-toggle="modal" data-target="#add_user">Add User</a></li>
-                        </ul>
+                        <h2>Requests List</h2>
                     </div>
                     <div class="body">
                         <div class="table-responsive">
-                            <table class="table table-hover js-basic-example dataTable table-custom m-b-0">
-                                <thead>
-                                    <tr>                                     
-                                        <th></th>
+                            <table class="table table-hover js-basic-example dataTable table-custom table-striped m-b-0 c_list">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>
+                                            <label class="fancy-checkbox">
+                                                <input class="select-all" type="checkbox" name="checkbox">
+                                                <span></span>
+                                            </label>
+                                        </th>
                                         <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Created Date</th>
-                                        <th>Role</th>
+                                        <th>Phone</th>
+                                        <th>Note</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $user)
+                                    @foreach ($advises as $advise)
                                         <tr>
                                             <td class="width45">
-                                                <img src="{{ $user->profile->avatar != null ? $user->profile->avatar : 'https://res.cloudinary.com/virtual-tour/image/upload/v1634539139/icons/default_avatar_k3wxez.png' }}" class="rounded-circle width35" alt="">
+                                            <label class="fancy-checkbox">
+                                                    <input class="checkbox-tick" type="checkbox" name="checkbox">
+                                                    <span></span>
+                                                </label>
+                                                <img src="https://res.cloudinary.com/virtual-tour/image/upload/v1634539139/icons/default_avatar_k3wxez.png" class="rounded-circle avatar" alt="">
                                             </td>
                                             <td>
-                                                <h6 class="mb-0">{{$user->profile->name}}</h6>
-                                                <span>{{$user->profile->email}}</span>
+                                                <h6 class="mb-0">{{$advise->name}}</h6>
+                                                <span>{{$advise->email}}</span>
                                             </td>
+                                            <td><span>{{$advise->contact}}</span></td>
+                                            <td><span>{{$advise->note}}</span></td>
                                             <td>
-                                                @if ($user->type == 'superadmin')
-                                                    <span class="badge badge-danger">Super Admin</span>
-                                                @elseif ($user->type == 'masteradmin')
-                                                    <span class="badge badge-info">Admin</span>
-                                                @endif
-                                            </td>
-                                            <td>{{$user->profile->updated_at}}</td>
-                                            <td>
-                                                @if ($user->type == 'superadmin')
-                                                    CEO and Founder
-                                                @elseif ($user->type == 'masteradmin')
-                                                    Managerment
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if ($user->type == 'superadmin')
-                                                
-                                                @elseif ($user->type == 'masteradmin')
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit"></i></button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o"></i></button>
+                                                @if ($advise->status == 0)
+                                                 <button class="btn btn-primary">handle</button>
+                                                @else
+                                                    <button class="btn btn-warning" style="pointer-events: none;opacity: 0.7;">processed</button>
                                                 @endif
                                             </td>
                                         </tr>
@@ -100,7 +94,7 @@
             </div>
         </div>
     </div>
-    <div class="modal animated fadeIn" id="add_user" tabindex="-1" role="dialog">
+    <div class="modal animated fadeIn" id="add_client" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -133,21 +127,21 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">    
-                                    <label for="tour_name" class="form-control-label">Type Account *</label>                                   
+                                    <label for="tour_name" class="form-control-label">Number Tour *</label>                                   
                                     <select class="form-control" name="type">
-                                        <option>Select Role Type</option>
-                                        <option value="superadmin">Superadmin</option>
-                                        <option value="masteradmin">Admin</option>
-                                        <option value="HR" disabled>HR</option>
-                                        <option value="employee" disabled>Employee</option>
-                                        <option value="sale" disabled>Sale</option>
+                                        <option>Select Number Tour</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                        <button type="submit" class="btn btn-primary btn-block">Create Tour A</button>
                     </div>
                 </form>
             </div>

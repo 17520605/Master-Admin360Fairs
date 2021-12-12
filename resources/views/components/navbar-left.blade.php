@@ -1,10 +1,10 @@
         <div id="left-sidebar" class="sidebar">
             <div class="sidebar-scroll">
                 <div class="user-account">
-                    <img src="{{ $profile->avatar != null ? $profile->avatar : 'https://res.cloudinary.com/virtual-tour/image/upload/v1634539139/icons/default_avatar_k3wxez.png' }}" class="rounded-circle user-photo" alt="User Profile Picture">
+                    <img src="{{ $profileAuth->avatar != null ? $profileAuth->avatar : 'https://res.cloudinary.com/virtual-tour/image/upload/v1634539139/icons/default_avatar_k3wxez.png' }}" class="rounded-circle user-photo" alt="User Profile Picture">
                     <div class="dropdown">
                         <span>Welcome,</span>
-                        <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{ $profile->avatar }}</strong></a>
+                        <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{ $profileAuth->name }}</strong></a>
                         <ul class="dropdown-menu dropdown-menu-right account animated flipInY">
                             <li><a href="page-profile2.html"><i class="icon-user"></i>My Profile</a></li>
                             <li><a href="app-inbox.html"><i class="icon-envelope-open"></i>Messages</a></li>
@@ -31,9 +31,9 @@
                 </div>
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs">
-                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#hr_menu">Client</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#project_menu">Tour</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#sub_menu"><i class="icon-grid"></i></a></li>
+                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#hr_menu">Dashboard</a></li>
+                    {{-- <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#project_menu">Tour</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#sub_menu"><i class="icon-grid"></i></a></li> --}}
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#setting"><i class="icon-settings"></i></a></li>
                 </ul>
 
@@ -42,11 +42,13 @@
                     <div class="tab-pane animated fadeIn active" id="hr_menu">
                         <nav class="sidebar-nav">
                             <ul class="main-menu metismenu">
-                                <li class="active"><a href="index.html"><i class="icon-speedometer"></i><span>HR Dashboard</span></a></li>
-                                <li><a href="app-holidays.html"><i class="icon-list"></i>Holidays</a></li>
-                                <li><a href="app-events.html"><i class="icon-calendar"></i>Events</a></li>
-                                <li><a href="/users"><i class="icon-user"></i>Users</a></li>
-                                <li> <a href="#Employees"><i class="icon-users"></i><span>Client</span></a></li>
+                                <li class="active"><a href="/"><i class="icon-speedometer"></i><span>HR Dashboard</span></a></li>
+                                <li>
+                                    <a href="/users"><i class="icon-lock"></i><span>Users</span></a>
+                                </li>
+                                <li> <a href="/clients"><i class="icon-users"></i><span>Client</span></a></li>
+                                <li><a href="/accounts"><i class="icon-user"></i>All Accounts</a></li>
+                                <li><a href="/requests"><i class="icon-check"></i>All Request</a></li>
                                 <li>
                                     <a href="#Payroll" class="has-arrow"><i class="icon-credit-card"></i><span>Payroll</span></a>
                                     <ul>
@@ -54,24 +56,10 @@
                                         <li><a href="payroll-salary.html">Employee Salary</a></li>
                                     </ul>
                                 </li>
-                                
-                                <li>
-                                    <a href="#Authentication" class="has-arrow"><i class="icon-lock"></i><span>Authentication</span></a>
-                                    <ul>
-                                        <li><a href="page-login.html">Login</a></li>
-                                        <li><a href="page-register.html">Register</a></li>
-                                        <li><a href="page-lockscreen.html">Lockscreen</a></li>
-                                        <li><a href="page-forgot-password.html">Forgot Password</a></li>
-                                        <li><a href="page-404.html">Page 404</a></li>
-                                        <li><a href="page-403.html">Page 403</a></li>
-                                        <li><a href="page-500.html">Page 500</a></li>
-                                        <li><a href="page-503.html">Page 503</a></li>
-                                    </ul>
-                                </li>
                             </ul>
                         </nav>
                     </div>
-                    <div class="tab-pane animated fadeIn" id="project_menu">
+                    {{-- <div class="tab-pane animated fadeIn" id="project_menu">
                         <nav class="sidebar-nav">
                             <ul class="main-menu metismenu">
                                 <li><a href="index2.html"><i class="icon-speedometer"></i><span>Dashboard</span></a></li>
@@ -219,7 +207,7 @@
                                 </li>
                             </ul>
                         </nav>
-                    </div>
+                    </div> --}}
                     <div class="tab-pane animated fadeIn" id="setting">
                         <div class="p-l-15 p-r-15">
                             <h6>Choose Skin</h6>

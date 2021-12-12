@@ -1,13 +1,21 @@
 <?php
 
 namespace App\Http\Controllers\customer;
-use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Auth;
 
-class dashboardController extends Controller
+class DashboardController extends Controller
 {
     public function index()
     {
-        return view('customer.dashboard');
+        $user = Auth::user();
+        $profileAuth = DB::table('profile')->where('userId', $user->id)->first();
+
+        $profile = \App\Models\Profile::where('userId', Auth::id())->first();
+        return view('customer.dashboard')->with(['profileAuth' => $profileAuth ]);
     }
 }

@@ -8,20 +8,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
-class UserController extends Controller
+class ClientController extends Controller
 {
     public function index()
     {
         $user = Auth::user();
         $profileAuth = DB::table('profile')->where('userId', $user->id)->first();
 
-        $users = \App\Models\User::where('type', '=', \App\Models\User::TYPE_MASTERADMIN) 
-        ->orWhere('type', '=', \App\Models\User::TYPE_SUPPERADMIN)->get();
+        $users = \App\Models\User::where('type', '=', \App\Models\User::TYPE_TOURADMIN)->get();
         foreach ($users as $user) {
             $profile = DB::table('profile')->where('userId', $user->id)->first();
             $users->profile = $profile;
         }
-        return view('customer.users.index',['users' => $users,'profile'=>$profile,'profileAuth'=>$profileAuth]);
+        return view('customer.clients.index',['users' => $users,'profile'=>$profile,'profileAuth'=>$profileAuth]);
     }
 
     public function saveCreate(Request $request)
@@ -50,8 +49,14 @@ class UserController extends Controller
                 $profile->contact = $contact;
                 $profile->save();
             }
+            $mailer = new MailService(
+                [$profile->email],
+                'Đăng kí tài khoản quản lý tour',
+                'tourAccount',
+            );
+            $mailer->sendMail();
 
-            return redirect('/users');
+            return redirect('/clients');
         }
         
         return json_encode($check);
@@ -74,5 +79,6 @@ class UserController extends Controller
         }
         return $check;
     }
+
 
 }

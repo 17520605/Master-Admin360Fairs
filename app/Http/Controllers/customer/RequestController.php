@@ -8,20 +8,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
-class UserController extends Controller
+class RequestController extends Controller
 {
     public function index()
     {
         $user = Auth::user();
         $profileAuth = DB::table('profile')->where('userId', $user->id)->first();
 
-        $users = \App\Models\User::where('type', '=', \App\Models\User::TYPE_MASTERADMIN) 
-        ->orWhere('type', '=', \App\Models\User::TYPE_SUPPERADMIN)->get();
-        foreach ($users as $user) {
-            $profile = DB::table('profile')->where('userId', $user->id)->first();
-            $users->profile = $profile;
-        }
-        return view('customer.users.index',['users' => $users,'profile'=>$profile,'profileAuth'=>$profileAuth]);
+        $advises = DB::table('advise')->orderBy('id', 'DESC')->get();
+        return view('customer.requests.index',['advises' => $advises,'profileAuth'=>$profileAuth]);
     }
 
     public function saveCreate(Request $request)
@@ -51,7 +46,7 @@ class UserController extends Controller
                 $profile->save();
             }
 
-            return redirect('/users');
+            return redirect('/clients');
         }
         
         return json_encode($check);

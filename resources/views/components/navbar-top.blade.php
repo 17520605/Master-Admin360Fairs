@@ -5,7 +5,7 @@
                 </div>
 
                 <div class="navbar-brand">
-                    <a href="index.html"><img src="https://wrraptheme.com/templates/lucid/hr/html/assets/images/logo.svg" alt="Lucid Logo" class="img-responsive logo"></a>
+                    <a href="/" style="font-weight: 800"> 360 Fairs Events</a>
                 </div>
 
                 <div class="navbar-right">

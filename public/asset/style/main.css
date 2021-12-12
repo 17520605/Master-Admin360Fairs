@@ -11546,6 +11546,7 @@ ul.list-email-received>li,
 
 .c_list .avatar {
     width: 40px;
+    height: 40px;
     box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
     border: 1px solid #fff
 }

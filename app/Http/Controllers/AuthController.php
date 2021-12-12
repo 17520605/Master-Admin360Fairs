@@ -17,8 +17,7 @@ class AuthController extends Controller
             $email = $request->get('email');
 
             $user = \App\Models\User::where([['email','=', $email],['type','=',\App\Models\User::TYPE_MASTERADMIN]])
-            ->orWhere([['email','=', $email],['type','=',\App\Models\User::TYPE_SUPPERADMIN]])->first();
-            if($user != null){
+            ->orWhere([['email','=', $email],['type','=',\App\Models\User::TYPE_SUPPERADMIN]])->first();            if($user != null){
                 if($user->isRequiredChangePassword == true || $user->password == null){
                     return view('auth.init_password', ['email' => $user->email]);
                 }
@@ -27,7 +26,7 @@ class AuthController extends Controller
                 }
             }
             else{
-                return view('auth.login', ['url' => $url]);
+                return view('auth.login', ['url' => $url])->with(['notif'=>'']);
             }
         }
 
@@ -36,10 +35,11 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $type = Auth::user()->type;
             if($type == \App\Models\User::TYPE_MASTERADMIN || $type == \App\Models\User::TYPE_SUPPERADMIN){
+                
                 return redirect('/');
             }
             else
-                return redirect('/login');
+                return view('auth.login')->with(['notif'=>'EMAIL OR PASSWORD ERROR']);
         } else {
             return redirect()->back()->withInput();
         }

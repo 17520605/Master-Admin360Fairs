@@ -5,10 +5,19 @@
     Route::get('/logout', 'AuthController@logout');
 
     Route::middleware('auth')->group(function (){
-        Route::get('/', 'customer\dashboardController@index');
+        Route::get('/', 'customer\DashboardController@index');
 
         Route::get('/users', 'customer\UserController@index');
         Route::post('/users/save-create', 'customer\UserController@saveCreate');
+
+        Route::get('/clients', 'customer\ClientController@index');
+        Route::post('/clients/save-create', 'customer\ClientController@saveCreate');
+
+        Route::get('/accounts', 'customer\AccountController@index');
+        Route::post('/accounts/save-create', 'customer\AccountController@saveCreate');
+
+        Route::get('/requests', 'customer\RequestController@index');
+        Route::post('/requests/save-create', 'customer\RequestController@saveCreate');
 
         Route::get('/events', 'customer\eventController@index');
         Route::get('/activities', 'customer\activityController@index');
