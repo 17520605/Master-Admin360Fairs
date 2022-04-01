@@ -2,40 +2,43 @@
 
 namespace App\Models;
 
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use App\Models\Profile;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
+class User extends Authenticatable
 {
-    use Authenticatable, Authorizable, CanResetPassword;
+    use HasApiTokens, HasFactory, Notifiable;
 
-    const LEVEL_VISITER = 10;
-    const LEVEL_SPEAKER = 20;
-    const LEVEL_PARTICIPANT = 30;
-    const LEVEL_TOURADMIN = 40;
-    const LEVEL_MASTERADMIN = 50;
-    const LEVEL_SUPERADMIN = 100;
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
 
-    const TYPE_SPEAKER = 'speaker';
-    const TYPE_PARTNER = 'partner';
-    const TYPE_TOURADMIN = 'touradmin';
-    const TYPE_SUPPERADMIN = 'superadmin';
-    const TYPE_MASTERADMIN = 'masteradmin';
-    
-    const PASSWORD_DEFAULT = '360fairs';
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
-    protected $table = 'users';
-    public $timestamps = true;
-
-    public function profile()
-    {
-        return $this->hasOne(Profile::class, 'userId');
-    }
-    
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 }

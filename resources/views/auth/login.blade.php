@@ -1,40 +1,63 @@
-@extends('layouts.login-master')
+@extends('layouts.app')
 @section('content')
-  
-    <div class="container" style="display: flex ;justify-content: center;align-items: center;height: 100vh;">
-        <div class="card" style="width: 40%;">
-            <div class="header">
-                <p class="lead h1 font-weight-bold text-center">Login to your account</p>
+	
+    <div class="account-pages pt-5 my-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="account-card-box">
+                        <div class="card mb-0">
+                            <div class="card-body p-4">
+
+                                <div class="text-center">
+                                    <div class="my-3">
+                                        <a href="index.html">
+                                            <span><img src="{{asset('admin/assets/images/logo/logo-xlarge.png')}}" alt="" height="38"></span>
+                                        </a>
+                                    </div>
+                                    <h5 class="text-muted text-uppercase py-3 font-16">Đăng nhập trang quản lý</h5>
+                                </div>
+
+                                <form class="mt-2" method="POST" action="{{env('APP_URL')}}/login">
+                                    @csrf
+                                    <input type="hidden" name="url" value="{{isset($url) ? $url : ''}}">
+                                    <div class="form-group mb-3">
+                                        <label for="email" class="control-label sr-only">Email</label>
+                                        <input type="email" name="email" class="form-control" id="email" value="{{isset($email) ? $email : ''}}" placeholder="Email" required>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label for="password" class="control-label sr-only">Password</label>
+                                        <input type="password" name="password" class="form-control" id="password" value="" placeholder="Password" required>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="checkbox-signin" checked="">
+                                            <label class="custom-control-label" for="checkbox-signin">Nhớ đăng nhập</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group text-center">
+                                        <button class="btn btn-success btn-block waves-effect waves-light" type="submit"> Đăng nhập </button>
+                                    </div>
+
+                                    <a href="pages-recoverpw.html" class="text-muted"><i class="mdi mdi-lock mr-1"></i> Quên mật khẩu?</a>
+                                    @if($notif != null || $notif != '')
+                                        <section class='alert alert-danger text-center'>{{$notif}}</section>
+                                    @endif
+                                </form>
+                            </div>
+                            <!-- end card-body -->
+                        </div>
+                        <!-- end card -->
+                    </div>
+                </div>
+                <!-- end col -->
             </div>
-            <div class="body">
-                <form class="form-auth-small user" method="POST" action="{{env('APP_URL')}}/login">
-                    @csrf
-                    <input type="hidden" name="url" value="{{isset($url) ? $url : ''}}">
-                    <div class="form-group">
-                        
-                        <label for="email" class="control-label sr-only">Email</label>
-                        <input type="email" name="email" class="form-control" id="email" value="{{isset($email) ? $email : ''}}" placeholder="Email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="control-label sr-only">Password</label>
-                        <input type="password" name="password" class="form-control" id="password" value="" placeholder="Password" required>
-                    </div>
-                    {{-- <div class="form-group clearfix">
-                        <label class="fancy-checkbox element-left">
-                            <input type="checkbox">
-                            <span>Remember me</span>
-                        </label>								
-                    </div> --}}
-                    <button type="submit" class="btn btn-primary btn-lg btn-block mb-3">LOGIN</button>
-                    @if($notif != null || $notif != '')
-                        <section class='alert alert-danger text-center'>{{$notif}}</section>
-                    @endif
-                    <div class="bottom">
-                        <span class="helper-text m-b-10"><i class="fa fa-lock"></i> <a href="page-forgot-password.html">Forgot password?</a></span>
-                        <span>Don't have an account? <a href="page-register.html">Register</a></span>
-                    </div>
-                </form>
-            </div>
+            
         </div>
-	</div>
-@endsection
+        <!-- end container -->
+    </div>
+    <!-- End Content-->
+@stop

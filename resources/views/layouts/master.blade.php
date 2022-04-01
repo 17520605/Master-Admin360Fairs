@@ -1,16 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-@include('components.header')
-<body class="theme-blue">
-    @include('components.page-loader')
-    <div id="wrapper">
-        @include('components.navbar-top')
-        @include('components.navbar-left')
-        <div id="main-content">
-            @yield('content')
+    @include('components.head')
+    <body>
+        <div id="wrapper">
+            <!-- Start of TopBar -->
+                @include('components.topbar')
+            <!-- End of TopBar -->
+            <!-- Start of LeftBar -->
+                @include('components.leftbar')
+            <!-- End of LeftBar -->
+            <div class="content-page">
+                @yield('content')
+                <!-- Start of Footer -->
+                    @include('components.footer')
+                <!-- End of Footer -->
+            </div>
         </div>
-    </div>
-    @include('components.footer')
-</body>
-
+        @include('components.foot')
+        @yield('script')
+    </body>
 </html>

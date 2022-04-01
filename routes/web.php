@@ -1,24 +1,18 @@
 <?php
-    use Illuminate\Support\Facades\Route;
-    Route::match(['get', 'post'], '/login', 'AuthController@login')->name('login');
-    Route::match(['get', 'post'], '/register', 'AuthController@register')->name('register');
-    Route::get('/logout', 'AuthController@logout');
 
-    Route::middleware('auth')->group(function (){
-        Route::get('/', 'customer\DashboardController@index');
+    Route::prefix('authenticate')->group(function() {
+        Route::match(['get', 'post'], '/login', 'AuthController@login')->name('login');
+        Route::get('/logout', 'AuthController@logout');
+    });
 
-        Route::get('/users', 'customer\UserController@index');
-        Route::post('/users/save-create', 'customer\UserController@saveCreate');
+    Route::get('/', 'AdminController@index')->name('admin.home');
 
-        Route::get('/clients', 'customer\ClientController@index');
-        Route::post('/clients/save-create', 'customer\ClientController@saveCreate');
-
-        Route::get('/accounts', 'customer\AccountController@index');
-        Route::post('/accounts/save-create', 'customer\AccountController@saveCreate');
-
-        Route::get('/requests', 'customer\RequestController@index');
-        Route::post('/requests/save-create', 'customer\RequestController@saveCreate');
-
-        Route::get('/events', 'customer\eventController@index');
-        Route::get('/activities', 'customer\activityController@index');
+    Route::group(['prefix' => 'article'], function(){
+        Route::get('/', 'ArticleController@index')->name('management.get.article.list-articles');
+        Route::get('/create', 'ArticleController@create')->name('management.get.article.create');
+        Route::post('/save-create', 'ArticleController@saveCreate')->name('management.post.article.save-create');
+        Route::get('/{id}/edit/', 'ArticleController@edit')->name('management.get.article.edit');
+        Route::post('/{id}/save-edit/', 'ArticleController@saveEdit')->name('management.post.article.save-edit');
+        Route::post('/{id}/toggle-visiable', 'ArticleController@toggleVisiable')->name('management.delete.article.toggle-visiable');
+        Route::delete('/{id}/', 'ArticleController@delete')->name('management.delete.article.delete');
     });

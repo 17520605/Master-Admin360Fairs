@@ -1,0 +1,1 @@
+$(".dropify").dropify({messages:{default:"Kéo và thả tệp vào đây hoặc nhấp vào đây",replace:"Kéo và thả tệp vào đây hoặc nhấp vào đây để thay thế",remove:"Remove",error:"Ooops, something wrong appended."},error:{fileSize:"The file size is too big (1M max)."}});
