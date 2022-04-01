@@ -100,7 +100,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type: "delete",
-            url: "{{env('APP_URL')}}/management/comment/" + id,
+            url: "{{env('APP_URL')}}/master/comment/" + id,
             data: "data",
             dataType: "json",
             success: function (res) {
@@ -137,7 +137,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: "post",
-                url: "{{env('APP_URL')}}/management/comment/" + id + "/toggle-visiable",
+                url: "{{env('APP_URL')}}/master/comment/" + id + "/toggle-visiable",
                 dataType: "json",
                 success: function (res) {
                     if(res.success === true){

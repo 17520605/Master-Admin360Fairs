@@ -10,7 +10,6 @@ class Contact extends BaseModel {
        'name',
        'phone',
        'email',
-       'title',
        'content',
        'status',
        'created_at',

@@ -95,23 +95,23 @@
     <div class="logo-box">
         <a href="index.html" class="logo text-center logo-dark">
             <span class="logo-lg">
-                    <img src="{{asset('admin/assets/images/logo/logo-xlarge.png')}}" alt="" height="32">
+                    <img src="{{asset('admin/assets/images/logo/logo_Sgallery.png')}}" alt="" height="42">
                     <!-- <span class="logo-lg-text-dark">Uplon</span> -->
             </span>
             <span class="logo-sm">
-                    <!-- <span class="logo-lg-text-dark">U</span> -->
-                    <img src="{{asset('admin/assets/images/logo/logo-mb-xlarge.png')}}" alt="" height="34">
+                    <!-- <span class="logo-lg-text-dark">U</span>MB -->
+                    <img src="{{asset('admin/assets/images/logo/logo_Sgallery.png')}}" alt="" height="34">
             </span>
         </a>
 
         <a href="index.html" class="logo text-center logo-light">
             <span class="logo-lg">
-                    <img src="{{asset('admin/assets/images/logo/logo-xlarge.png')}}" alt="" height="32">
+                    <img src="{{asset('admin/assets/images/logo/logo_Sgallery.png')}}" alt="" height="42">
                     <!-- <span class="logo-lg-text-dark">Uplon</span> -->
             </span>
             <span class="logo-sm">
-                    <!-- <span class="logo-lg-text-dark">U</span> -->
-                    <img src="{{asset('admin/assets/images/logo/logo-mb-xlarge.png')}}" alt="" height="34">
+                    <!-- <span class="logo-lg-text-dark">U</span>MB -->
+                    <img src="{{asset('admin/assets/images/logo/logo_Sgallery.png')}}" alt="" height="34">
             </span>
         </a>
     </div>

@@ -13,13 +13,19 @@
                     </li>
                     <li>
                         <a href="#">
+                            <i class="mdi mdi-account-multiple"></i>
+                            <span> Account </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('master.get.article.list-articles')}}">
                             <i class="mdi mdi-feather"></i>
                             <span> Bài viết </span>
                         </a>
                     </li>
                     <li class="menu-title mt-2">Mở rộng</li>
                     <li>
-                        <a href="#">
+                        <a href="{{ route('master.get.contact.list-contacts')}}">
                             <i class="mdi mdi-comment-question"></i>
                             <span class="badge badge-danger badge-pill float-right">9</span>
                             <span> Liên hệ</span>

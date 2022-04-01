@@ -60,7 +60,7 @@
                     <label for="inputEmail3" class="col-sm-2 col-form-label"></label>
                     <div class="col-sm-10">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="input-hidden" name="public" checked>
+                            <input type="checkbox" class="custom-control-input" id="input-hidden" name="isPublic" checked>
                             <label class="custom-control-label" for="input-hidden">Hiển thị bài viết ngay</label>
                         </div>
                     </div>

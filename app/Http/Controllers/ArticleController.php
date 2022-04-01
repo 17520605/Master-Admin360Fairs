@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Article;
 use App\Http\Requests\RequestArticle;
 use Illuminate\Contracts\Support\Renderable;
@@ -36,22 +37,22 @@ class ArticleController extends Controller
         $slug = $request->input('slug');
         $short_content = $request->input('short_content');
         $content = $request->input('content');
-        $files = $request->file('files');
-        $hidden = $request->input('hidden');
-        for ($i=0; $i < count($files); $i++) {
-            $assetId = \App\Services\StorageService::upload($files[$i], $slug.'_'.($i+1));
-        }
+        $file =  $request->file('files');
+        $isPublic = $request->input('public');
+        $banner = 'https://res.cloudinary.com/virtual-tour/image/upload/v1637651914/Background/webinar-default-poster_f23c8z.jpg';
+        
+        $banner = $this->uploadFile($file, true)->url;
         
         $article = new \App\Models\Article();
         $article->title = $title;
         $article->slug = $slug;
-        $article->poster_id =  $assetId;
+        $article->banner =  $banner;
         $article->short_content = $short_content;
         $article->content = $content;
-        $article->is_hidden = (!isset($hidden));
+        $article->isPublic = $isPublic;
         $article->save();
 
-        return redirect()->route('management.get.article.list-articles');
+        return redirect()->route('master.get.article.list-articles');
 
     }
 
@@ -95,7 +96,7 @@ class ArticleController extends Controller
             $article->is_hidden = (!isset($hidden));
             $article->save();
         }
-        return redirect()->route('management.get.article.list-articles');;
+        return redirect()->route('master.get.article.list-articles');;
     }
 
     public function toggleVisiable($id, Request $request)

@@ -27,7 +27,7 @@
                                     <th>Họ tên</th>
                                     <th>Email</th>
                                     <th>Trạng thái</th>
-                                    <th>Tiêu đề</th>
+                                    <th>Nội dung</th>
                                     <th style="width: 6%;">Thao tác</th>
                                 </tr>
                             </thead>
@@ -41,7 +41,7 @@
                                         <td>
                                             <button onclick="toggleVisiable(this)" class="btn btn-xs btnStatusHandle {{ $contact->status != 1 ? 'btn-success' : 'btn-secondary' }}" > {{ $contact->status != 1 ? 'Chưa xữ lý' : 'Đã xữ lý' }}</button>
                                         </td>
-                                        <th>{{$contact->title}}</th>
+                                        <th>{{$contact->content}}</th>
                                         <td>
                                             <button class="btn waves-effect waves-light btn-success"
                                                 onclick="openPopupView('{{ $contact->id }}')"><i class="mdi mdi-eye"></i></button>
@@ -89,10 +89,6 @@
                                 <td id="popup_contact_email"></td>
                               </tr>
                               <tr>
-                                <th scope="row">Tiêu đề :</th>
-                                <td id="popup_contact_title"></td>
-                              </tr>
-                              <tr>
                                 <th scope="row">Nội dung :</th>
                                 <td id="popup_contact_content"></td>
                               </tr>
@@ -137,7 +133,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: "get",
-                url: "{{ env('APP_URL') }}/management/contact/" + id,
+                url: "{{ env('APP_URL') }}/contact/" + id,
             }).done(function(result){
                 console.log(result);
                 if(result)
@@ -145,7 +141,6 @@
                     $('#popup_contact_name').text(result.name);
                     $('#popup_contact_phone').html('<a href="tel:'+result.phone+'">'+result.phone+'</a>');
                     $('#popup_contact_email').html('<a href="mailto:'+result.email+'">'+result.email+'</a>');
-                    $('#popup_contact_title').text(result.title);
                     $('#popup_contact_content').text(result.content);
                     $('#popup_contact_status').html('<button onclick="toggleVisiablePop('+result.id+')" class="btn btnStatusHandle btn-xs {{ $contact->status != 1 ? "btn-success" : "btn-secondary" }}" > {{ $contact->status != 1 ? "Chưa xữ lý" : "Đã xữ lý" }}</button>');
                     $('#viewContact').modal('show');
@@ -160,7 +155,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: "delete",
-                url: "{{ env('APP_URL') }}/management/contact/" + id,
+                url: "{{ env('APP_URL') }}/contact/" + id,
                 data: "data",
                 dataType: "json",
                 success: function(res) {
@@ -196,7 +191,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: "post",
-                url: "{{ env('APP_URL') }}/management/contact/" + id + "/toggle-visiable",
+                url: "{{ env('APP_URL') }}/contact/" + id + "/toggle-visiable",
                 dataType: "json",
                 success: function(res) {
                     if (res.success === true) {
@@ -232,7 +227,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: "post",
-                url: "{{ env('APP_URL') }}/management/contact/" + id + "/toggle-visiable",
+                url: "{{ env('APP_URL') }}/contact/" + id + "/toggle-visiable",
                 dataType: "json",
                 success: function(res) {
                     if (res.success === true) {
