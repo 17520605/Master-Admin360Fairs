@@ -3,20 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
-use Cloudinary\Uploader;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+
 
 class StorageController extends Controller
 {
     public function upload(Request $request)
     {
+        // Cach 1
         if($request->hasFile('file')){
-            $rs = cloudinary()->upload($request->file('file')->getRealPath(), [
-                'resource_type' => 'auto'
-            ]);
-            return response(json_encode($rs->getResponse()));
+            $rs = $this->uploadFile($request->file('file'));
+            return response(json_encode($rs));
         }
+
+        // // Cach 2
+        // if($request->hasFile('file')){
+        //     $rs = \App\Services\StorageService::uploadFile($request->file('file'));
+        //     return response(json_encode($rs));
+        // }
+
         return response();
+
     }
 }
