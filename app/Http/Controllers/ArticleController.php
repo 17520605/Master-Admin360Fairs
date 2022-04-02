@@ -9,21 +9,14 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Services\ArticleService;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
     public function index()
     {   
         $articles = ArticleService::getAll();
-        foreach ($articles as $article) {
-            $images = \App\Services\StorageService::getUrl($article->poster_id, 'small');
-            $article->image = $images ;
-        }
-        $viewData = [
-            'articles'=> $articles,
-        ];
-
-        return view('article.index', $viewData);
+        return view('article.index', ['articles'=> $articles]);
     }
 
     public function create()
@@ -103,11 +96,11 @@ class ArticleController extends Controller
     {
         $article = Article::where('id', $id)->first();
         if(isset($article)){
-            $article->is_hidden = !$article->is_hidden;
+            $article->isPublic = !$article->isPublic;
             $article->save();
             return [
                 'success' => true,
-                'isHidden' => $article->is_hidden,
+                'isHidden' => $article->isPublic,
             ]; 
         }
         else{
@@ -118,6 +111,19 @@ class ArticleController extends Controller
         }
     }
 
+    public function uploadFile($file)
+    {   
+        $path = Storage::disk('temp')->putFile('/', $file);
+        $res = cloudinary()->upload(Storage::disk('temp')->path($file->hashName()), [
+            'resource_type' => 'auto'
+        ])->getResponse();
+        
+        // delete file
+        $path = Storage::disk('temp')->delete($path);
+
+        $resObj = json_decode(json_encode($res));
+        return $resObj;
+    }
 
     public function delete($id, Request $request)
     {

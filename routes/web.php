@@ -13,7 +13,7 @@
         Route::post('/save-create', 'ArticleController@saveCreate')->name('master.post.article.save-create');
         Route::get('/{id}/edit/', 'ArticleController@edit')->name('master.get.article.edit');
         Route::post('/{id}/save-edit/', 'ArticleController@saveEdit')->name('master.post.article.save-edit');
-        Route::post('/{id}/toggle-visiable', 'ArticleController@toggleVisiable')->name('master.delete.article.toggle-visiable');
+        Route::post('/{id}/toggle-visiable', 'ArticleController@toggleVisiable')->name('master.post.article.toggle-visiable');
         Route::delete('/{id}/', 'ArticleController@delete')->name('master.delete.article.delete');
     });
 

@@ -30,6 +30,7 @@
                                     <th>Tên bài viết</th>
                                     <th>Hình ảnh</th>
                                     <th>Trạng thái</th>
+                                    <th>Người viết</th>
                                     <th>Ngày tạo</th>
                                     <th>Thao tác</th>
                                 </tr>
@@ -43,10 +44,13 @@
                                             <h6 href="app-product.html" class="font-weight-bold">{{$article->title}}</h6>
                                         </td>
                                         <td>
-                                            <img src="{{$article->image}}" class="rounded" height="70" width="140" style="object-fit: cover;">
+                                            <img src="{{$article->banner}}" class="rounded" height="70" width="140" style="object-fit: cover;">
                                         </td>
                                         <td>
-                                            <button onclick="toggleVisiable(this)" class="btn waves-effect waves-light {{$article->is_hidden != 0 ? 'btn-secondary' : 'btn-success'  }}"><i class="fas {{$article->is_hidden != 0 ? 'fa-eye-slash' : 'fa-eye'  }}"></i></button>
+                                            <button onclick="toggleVisiable(this)" class="btn waves-effect waves-light {{$article->is_hidden != 0 ? 'btn-secondary' : 'btn-success'  }}"><i class="fas {{$article->isPublic != 0 ? 'fa-eye-slash' : 'fa-eye'  }}"></i></button>
+                                        </td>
+                                        <td>
+                                            {{$article->author}}
                                         </td>
                                         <td>
                                             {{$article->created_at}}
@@ -105,7 +109,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type: "delete",
-            url: "{{env('APP_URL')}}/master/article/" + id,
+            url: "{{env('APP_URL')}}/article/" + id,
             data: "data",
             dataType: "json",
             success: function (res) {
@@ -136,49 +140,49 @@
     }
 
     function toggleVisiable(target){
-            let id = $(target).parents('tr').attr('data-article-id');
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: "post",
-                url: "{{env('APP_URL')}}/master/article/" + id + "/toggle-visiable",
-                dataType: "json",
-                success: function (res) {
-                    if(res.success === true){
-                        if(res.isHidden){
-                            $(target).removeClass('btn-success');
-                            $(target).addClass('btn-secondary');
-                            $(target).find('i').removeClass('fa-eye');
-                            $(target).find('i').addClass('fa-eye-slash');
-                        }
-                        else{
-                            $(target).removeClass('btn-secondary');
-                            $(target).addClass('btn-success');
-                            $(target).find('i').removeClass('fa-eye-slash');
-                            $(target).find('i').addClass('fa-eye');
-                        }
-
-                        tata.success('Thành công', 'Đã thay đổi thành công', {
-                            animate: 'slide',
-                            closeBtn: true,
-                        })
+        let id = $(target).parents('tr').attr('data-article-id');
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: "post",
+            url: "{{env('APP_URL')}}/article/" + id + "/toggle-visiable",
+            dataType: "json",
+            success: function (res) {
+                if(res.success === true){
+                    if(res.isHidden){
+                        $(target).removeClass('btn-success');
+                        $(target).addClass('btn-secondary');
+                        $(target).find('i').removeClass('fa-eye');
+                        $(target).find('i').addClass('fa-eye-slash');
                     }
                     else{
-                        tata.error('Lỗi', res.errors, {
-                            animate: 'slide',
-                            closeBtn: true,
-                        })
+                        $(target).removeClass('btn-secondary');
+                        $(target).addClass('btn-success');
+                        $(target).find('i').removeClass('fa-eye-slash');
+                        $(target).find('i').addClass('fa-eye');
                     }
-                },
-                error: function(){
-                    tata.error('Lỗi', "Cập nhật thất bại", {
+
+                    tata.success('Thành công', 'Đã thay đổi thành công', {
                         animate: 'slide',
                         closeBtn: true,
-                    });
+                    })
                 }
-            });
-        }
+                else{
+                    tata.error('Lỗi', res.errors, {
+                        animate: 'slide',
+                        closeBtn: true,
+                    })
+                }
+            },
+            error: function(){
+                tata.error('Lỗi', "Cập nhật thất bại", {
+                    animate: 'slide',
+                    closeBtn: true,
+                });
+            }
+        });
+    }
 </script>
 @stop
 

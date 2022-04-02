@@ -21,7 +21,7 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Tên bài viết :</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" id="title_article" placeholder="Tên bài viết">
+                    <input type="text" class="form-control" id="title_article" name="title" placeholder="Tên bài viết">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -53,7 +53,7 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Tên Tác giả :</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" id="	author" placeholder="Tác giả" name="	author">
+                    <input type="text" class="form-control" id="author" placeholder="Tác giả" name="author">
                     </div>
                 </div>
                 <div class="form-group row">

@@ -18,5 +18,6 @@
         </div>
         @include('components.foot')
         @yield('script')
+        
     </body>
 </html>
