@@ -32,11 +32,15 @@ class ArticleController extends Controller
         $content = $request->input('content');
         $file =  $request->file('files');
         $isPublic = $request->input('public');
+        
         $banner = 'https://res.cloudinary.com/virtual-tour/image/upload/v1637651914/Background/webinar-default-poster_f23c8z.jpg';
-        
-        $banner = $this->uploadFile($file, true)->url;
-        
+        if($file)
+        {
+            $banner = $this->uploadFile($file, true)->url;
+        }
+
         $article = new \App\Models\Article();
+        
         $article->title = $title;
         $article->slug = $slug;
         $article->banner =  $banner;

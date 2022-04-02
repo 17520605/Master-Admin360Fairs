@@ -27,33 +27,26 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Tên bài viết</th>
+                                    <th>Tên Tài khoản</th>
                                     <th>Hình ảnh</th>
-                                    <th>Trạng thái</th>
-                                    <th>Ngày tạo</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Loại tk</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(@isset($articles) > 0)
-                                    @foreach ($articles as $article)
-                                    <tr data-article-id='{{$article->id}}'>
-                                        <td>{{$article->id}}</td>
+                                @if(@isset($users) > 0)
+                                    @foreach ($users as $user)
+                                    <tr data-user-id='{{$user->id}}'>
+                                        <td>{{$user->id}}</td>
                                         <td>
-                                            <h6 href="app-product.html" class="font-weight-bold">{{$article->title}}</h6>
+                                            <h6 href="app-product.html" class="font-weight-bold">{{$user->userinfo->name}}</h6>
                                         </td>
-                                        <td>
-                                            <img src="{{$article->image}}" class="rounded" height="70" width="140" style="object-fit: cover;">
-                                        </td>
-                                        <td>
-                                            <button onclick="toggleVisiable(this)" class="btn waves-effect waves-light {{$article->is_hidden != 0 ? 'btn-secondary' : 'btn-success'  }}"><i class="fas {{$article->is_hidden != 0 ? 'fa-eye-slash' : 'fa-eye'  }}"></i></button>
-                                        </td>
-                                        <td>
-                                            {{$article->created_at}}
-                                        </td>
+                                       
                                         <td> 
-                                            <a class="btn waves-effect waves-light btn-success" href="{{route('master.get.article.edit', $article->id)}}" ><i class="mdi mdi-pencil-outline"></i></a>
-                                            <button class="btn waves-effect waves-light btn-danger" onclick="openPopupDelete('{{$article->id}}')"><i class="mdi mdi-trash-can"> </i></button>
+                                            {{-- <a class="btn waves-effect waves-light btn-success" href="{{route('master.get.article.edit', $article->id)}}" ><i class="mdi mdi-pencil-outline"></i></a>
+                                            <button class="btn waves-effect waves-light btn-danger" onclick="openPopupDelete('{{$article->id}}')"><i class="mdi mdi-trash-can"> </i></button> --}}
                                         </td>
                                     </tr>
                                     @endforeach
