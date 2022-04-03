@@ -21,7 +21,7 @@ class AuthController extends Controller
             $url = $request->get('url');
             $email = $request->get('email');
 
-            $user = \App\Models\User::where([['email','=', $email],['type','=',TYPE_SUPPERADMIN]])
+            $user = Users::where([['email','=', $email],['type','=',TYPE_SUPPERADMIN]])
             ->orWhere([['email','=', $email],['type','=',TYPE_SUPPERADMIN]])->first();            
             if($user != null){
                 if($user->isRequiredChangePassword == true || $user->password == null){
