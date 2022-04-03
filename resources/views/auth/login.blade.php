@@ -70,9 +70,9 @@
             dataType: "json",
             success: function (response) {
                 if(response && response.result === 'ok'){
-                    if(url.searchParams.callback){
+                    if(url.searchParams.get('callback') && url.searchParams.get('callback') != ''){
                         $('#message').text(response.message).show();
-                        location.href = url.searchParams.callback;
+                        location.href = url.searchParams.get('callback');
                     }
                     else{
                         location.href = '/';
