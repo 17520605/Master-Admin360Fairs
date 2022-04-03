@@ -1,23 +1,23 @@
-<!DOCTYPE html> 
-<html lang="en"> 
+<!DOCTYPE html>
+<html lang="en">
     @include('components.head')
-    <body> 
-        <div id="wrapper"> 
-            <!-- Start of TopBar --> 
+    <body>
+        <div id="wrapper">
+            <!-- Start of TopBar -->
                 @include('components.topbar')
-            <!-- End of TopBar --> 
-            <!-- Start of LeftBar --> 
+            <!-- End of TopBar -->
+            <!-- Start of LeftBar -->
                 @include('components.leftbar')
-            <!-- End of LeftBar --> 
-            <div class="content-page"> 
+            <!-- End of LeftBar -->
+            <div class="content-page">
                 @yield('content')
-                <!-- Start of Footer --> 
+                <!-- Start of Footer -->
                     @include('components.footer')
-                <!-- End of Footer --> 
-            </div> 
-        </div> 
+                <!-- End of Footer -->
+            </div>
+        </div>
         @include('components.foot')
         @yield('script')
         
-    </body> 
-</html> 
+    </body>
+</html>

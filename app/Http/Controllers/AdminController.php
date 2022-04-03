@@ -13,9 +13,9 @@ class AdminController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $profile = Profile::where('userId', $user-> id)-> first();
-        Session::put('nameAuth', $profile-> name);
-        Session::put('avatarAuth', $profile-> avatar);
+        $profile = Profile::where('userId', $user->id)->first();
+        Session::put('nameAuth', $profile->name);
+        Session::put('avatarAuth', $profile->avatar);
         return view('dashboard.index');
     }
 }

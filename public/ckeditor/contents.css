@@ -121,13 +121,13 @@ figure
 	display: inline-block;
 }
 
-figure > figcaption
+figure >figcaption
 {
 	text-align: center;
 	display: block; /* For IE8 */
 }
 
-a > img {
+a >img {
 	padding: 1px;
 	margin: 1px;
 	border: none;
@@ -155,7 +155,7 @@ a > img {
 	padding: 0;
 }
 
-.image-clean > figcaption
+.image-clean >figcaption
 {
 	font-size: .9em;
 	text-align: right;

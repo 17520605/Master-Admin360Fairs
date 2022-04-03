@@ -1,17 +1,17 @@
 <?php 
 // Define file upload path 
 $upload_dir = array( 
-    'img'=> 'uploads/', 
+    'img'=>'uploads/', 
 ); 
  
 // Allowed image properties  
 $imgset = array( 
-    'maxsize' => 2000, 
-    'maxwidth' => 1024, 
-    'maxheight' => 800, 
-    'minwidth' => 10, 
-    'minheight' => 10, 
-    'type' => array('bmp', 'gif', 'jpg', 'jpeg', 'png'), 
+    'maxsize' =>2000, 
+    'maxwidth' =>1024, 
+    'maxheight' =>800, 
+    'minwidth' =>10, 
+    'minheight' =>10, 
+    'type' =>array('bmp', 'gif', 'jpg', 'jpeg', 'png'), 
 ); 
  
 // If 0, will OVERWRITE the existing file 
@@ -32,7 +32,7 @@ function setFName($p, $fn, $ex, $i){
 } 
  
 $re = ''; 
-if(isset($_FILES['upload']) && strlen($_FILES['upload']['name']) > 1) { 
+if(isset($_FILES['upload']) && strlen($_FILES['upload']['name']) >1) { 
  
     define('F_NAME', preg_replace('/\.(.+?)$/i', '', basename($_FILES['upload']['name'])));   
  
@@ -50,7 +50,7 @@ if(isset($_FILES['upload']) && strlen($_FILES['upload']['name']) > 1) {
         list($width, $height) = getimagesize($_FILES['upload']['tmp_name']); 
  
         if(isset($width) && isset($height)) { 
-            if($width > $imgset['maxwidth'] || $height > $imgset['maxheight']){ 
+            if($width >$imgset['maxwidth'] || $height >$imgset['maxheight']){ 
                 $re .= '\\n Width x Height = '. $width .' x '. $height .' \\n The maximum Width x Height must be: '. $imgset['maxwidth']. ' x '. $imgset['maxheight']; 
             } 
  
@@ -58,7 +58,7 @@ if(isset($_FILES['upload']) && strlen($_FILES['upload']['name']) > 1) {
                 $re .= '\\n Width x Height = '. $width .' x '. $height .'\\n The minimum Width x Height must be: '. $imgset['minwidth']. ' x '. $imgset['minheight']; 
             } 
  
-            if($_FILES['upload']['size'] > $imgset['maxsize']*1000){ 
+            if($_FILES['upload']['size'] >$imgset['maxsize']*1000){ 
                 $re .= '\\n Maximum file size must be: '. $imgset['maxsize']. ' KB.'; 
             } 
         } 

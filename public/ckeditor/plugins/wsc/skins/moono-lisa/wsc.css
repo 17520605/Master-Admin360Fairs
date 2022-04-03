@@ -4,12 +4,12 @@
     top: 39px !important;
 }
 
-div[name=SpellTab] .wsc-spelltab-bottom .cke_dialog_ui_vbox td > .cke_dialog_ui_button:first-child
+div[name=SpellTab] .wsc-spelltab-bottom .cke_dialog_ui_vbox td >.cke_dialog_ui_button:first-child
 {
     margin-top: 4px;
 }
 
-div[name=SpellTab] .wsc-spelltab-bottom .cke_dialog_ui_hbox_first .cke_dialog_ui_select > label
+div[name=SpellTab] .wsc-spelltab-bottom .cke_dialog_ui_hbox_first .cke_dialog_ui_select >label
 {
     margin-left: 0;
 }
@@ -31,8 +31,8 @@ div[name=Thesaurus] div.cke_dialog_ui_input_select select.cke_dialog_ui_input_se
     margin-top: 0;
 }
 
-div[name=GrammTab] .cke_dialog_ui_vbox tbody > tr:first-child .cke_dialog_ui_button,
-div[name=Thesaurus] .cke_dialog_ui_vbox tbody > tr:first-child .cke_dialog_ui_button
+div[name=GrammTab] .cke_dialog_ui_vbox tbody >tr:first-child .cke_dialog_ui_button,
+div[name=Thesaurus] .cke_dialog_ui_vbox tbody >tr:first-child .cke_dialog_ui_button
 {
     margin-top: 4px !important;
 }

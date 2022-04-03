@@ -21,7 +21,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function profile()
     {
-        return $this-> hasOne(Profile::class, 'userId');
+        return $this->hasOne(Profile::class, 'userId');
     }
     
 }
