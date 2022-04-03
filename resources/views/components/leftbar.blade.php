@@ -27,7 +27,7 @@
                     <li>
                         <a href="{{ route('master.get.contact.list-contacts')}}">
                             <i class="mdi mdi-comment-question"></i>
-                            <span class="badge badge-danger badge-pill float-right">9</span>
+                            {{-- <span class="badge badge-danger badge-pill float-right">9</span> --}}
                             <span> Liên hệ</span>
                         </a>
                     </li>
