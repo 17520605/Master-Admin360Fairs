@@ -6,7 +6,7 @@
                 <ul class="metismenu" id="side-menu">
                     <li class="menu-title">Chức năng</li>
                     <li>
-                        <a href="#">
+                        <a href="{{ route('master.home')}}">
                             <i class="mdi mdi-view-dashboard"></i>
                             <span> Dashboard </span>
                         </a>

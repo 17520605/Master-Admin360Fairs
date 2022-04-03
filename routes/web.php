@@ -5,7 +5,7 @@
     Route::get('/logout', 'AuthController@logout');
     
     Route::middleware('auth')->group(function (){
-        Route::get('/', 'AdminController@index')->name('admin.home');
+        Route::get('/', 'AdminController@index')->name('master.home');
         Route::post('storage/upload', 'StorageController@upload');
         
         Route::group(['prefix' => 'article'], function(){

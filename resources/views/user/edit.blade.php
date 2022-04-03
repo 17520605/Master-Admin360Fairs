@@ -9,10 +9,10 @@
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Trang chủ</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Tài khoản</a></li>
-                                <li class="breadcrumb-item active">Thêm mới tài khoản</li>
+                                <li class="breadcrumb-item active">Chỉnh sửa tài khoản</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Thêm mới tài khoản</h4>
+                        <h4 class="page-title">Chỉnh sửa tài khoản</h4>
                     </div>
                 </div>
             </div>

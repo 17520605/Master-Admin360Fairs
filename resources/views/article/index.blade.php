@@ -50,7 +50,7 @@
                                             <img src="{{$article->banner}}" class="rounded" height="70" width="140" style="object-fit: cover;">
                                         </td>
                                         <td>
-                                            <button onclick="toggleVisiable(this)" class="btn waves-effect waves-light {{$article->is_hidden != 0 ? 'btn-success' : 'btn-secondary'}}">{{$article->isPublic != 0 ? 'UnPublic' : 'Public'  }}</button>
+                                            <button onclick="toggleVisiable(this)" class="btn waves-effect waves-light {{$article->isPublic != 0 ?'btn-secondary':'btn-success' }}">{{$article->isPublic != 0 ? 'UnPublic' : 'Public'  }}</button>
                                         </td>
                                         <td>
                                             {{$article->author}}

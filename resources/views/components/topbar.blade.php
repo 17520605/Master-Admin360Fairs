@@ -11,10 +11,10 @@
                 <div class="dropdown-item noti-title">
                     <h5 class="font-16 text-white m-0">
                         <span class="float-right">
-                                <a href="" class="text-white">
-                                    <small>Xóa tất cả</small>
-                                </a>
-                            </span>Thông báo
+                            <a href="" class="text-white">
+                                <small>Xóa tất cả</small>
+                            </a>
+                        </span>Thông báo
                     </h5>
                 </div>
 
@@ -50,14 +50,14 @@
 
         <li class="dropdown notification-list">
             <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                <img src="{{asset('admin/assets/images/users/avatar-1.jpg')}}" alt="user-image" class="rounded-circle">
-                <span class="d-none d-sm-inline-block ml-1 font-weight-medium">Khai Nguyễn Hữu Minh</span>
+                <img style="height: 42px; width: 42px; object-fit: cover;" src="{{Session::get('avatarAuth')?Session::get('avatarAuth'):'/admin/assets/images/undraw_profile.svg'}}" alt="user-image" class="rounded-circle">
+                <span class="d-none d-sm-inline-block ml-1 font-weight-medium">{{Session::get('nameAuth')?Session::get('nameAuth'):'Name'}}</span>
                 <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                 <!-- item-->
                 <div class="dropdown-header noti-title">
-                    <h6 class="text-overflow text-white m-0">Chào Khai !</h6>
+                    <h6 class="text-overflow text-white m-0">Chào  {{Session::get('nameAuth')?Session::get('nameAuth'):'Name'}} !</h6>
                 </div>
 
                 <!-- item-->
