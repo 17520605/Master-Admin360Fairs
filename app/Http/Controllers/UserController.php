@@ -94,8 +94,8 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $user = Profile::where('UserId', $id)->first();
-        return view('user.edit')->with(['user' => $user]);
+        $profile = Profile::where('UserId', $id)->first();
+        return view('user.edit')->with(['profile' => $profile]);
     }
 
     public function saveEdit($id, Request $request)
@@ -105,31 +105,26 @@ class UserController extends Controller
         $phone = $request->input('phone');
         $email = $request->input('email');
         $password = $request->input('password');
-        $address = $request->input('address');
         $type = $request->input('type');
-        $isPublic = $request->input('isPublic');
-        $user = User::where('id', $userId)->first();
-        if($password == null){
-            $password = $user->password;
-        }
-        else
-        {
-            $password = bcrypt($password);
-        }
 
+        $user = User::where('id', $userId)->first();
         $user->email = $email;
-        $user->password = $password;
         $user->save();
-        $profile = Profile::where('UserId', $id)->first();
-        $profile->name =$name;
+        
+        $profile = Profile::where('userId', $id)->first();
+        $profile->name = $name;
         $profile->email = $email;
-        $profile->userId =$userId;
-        $profile->contact =$phone;
-        $profile->address =$address;
+        $profile->contact = $phone;
         $profile->type = $type;
         $profile->save();
 
-        return redirect()->route('master.get.user.list-users');
+        return response()->json([
+            'result' => 'ok',
+            'data' => [
+                'user' => $user,
+                'profile' => $profile,
+            ],
+        ], 200);
     }
 
     public function toggleVisiable($id, Request $request)
@@ -151,6 +146,38 @@ class UserController extends Controller
         }
     }
 
+    public function sendEmailVerify($id, Request $request)
+    {
+        $user = User::where('id', $id)->first();
+        $profile = Profile::where('userId', $id)->first();
+        if(isset($profile) && isset($user)){
+            $mail = new MailService(
+                [$profile->email],
+                '360fairs. Xác thực tài khoản',
+                'mail.verify',
+                [
+                    'name' =>  $profile->name,
+                    'email' => $profile->email,
+                    'token' => $user->accessToken
+                ]
+            );
+    
+            $mail->sendMail();
+    
+            return response()->json([
+                'result' => 'ok',
+                'message' => "Đã gửi email xác thực"
+            ], 200);
+        }
+        else
+        {
+            return response()->json([
+                'result' => 'fail',
+                'message' => "ID tài khoản không chính xác"
+            ], 200);
+        }
+
+    }
 
     public function delete($id, Request $request)
     {

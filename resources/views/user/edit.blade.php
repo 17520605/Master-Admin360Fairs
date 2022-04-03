@@ -9,71 +9,52 @@
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Trang chủ</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Tài khoản</a></li>
-                                <li class="breadcrumb-item active">Thêm mới tài khoản</li>
+                                <li class="breadcrumb-item active">Chỉnh sửa tài khoản</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Thêm mới tài khoản</h4>
+                        <h4 class="page-title">Chỉnh sửa tài khoản</h4>
                     </div>
                 </div>
             </div>
-            <form action="{{route('master.post.user.save-edit',$user->userId)}}" method="POST" enctype="multipart/form-data">
+            <form id="editForm">
                 @csrf
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Họ tên khách hàng hoặc tổ chức :</label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Tên cá nhân / tổ chức : <span style="color: red">*</span></label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" id="" name="name" placeholder="Họ tên khách hàng hoặc tổ chức" value="{{$user->name}}">
-                    </div>
-                </div>
- 
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email khách hàng :</label>
-                    <div class="col-sm-10">
-                    <input type="text" class="form-control" id="" name="email" placeholder="Email khách hàng" value="{{$user->email}}" >
+                    <input type="text" class="form-control" value="{{$profile->name}}" name="name" placeholder="Tên cá nhân hoặc tổ chức" required>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Số điện thoại khách hàng :</label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email : <span style="color: red">*</span></label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" id="" name="phone" placeholder="Số điện thoại khách hàng" value="{{$user->contact!=null?$user->contact:''}}" >
+                    <input type="text" class="form-control" value="{{$profile->email}}" name="email" placeholder="Email cá nhân hoặc tổ chức" required>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Password khách hàng :</label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Số điện thoại :</label>
                     <div class="col-sm-10">
-                    <input type="password" class="form-control" id="" name="password" placeholder="Password khách hàng">
+                    <input type="text" class="form-control" value="{{$profile->contact}}" name="phone" placeholder="Số điện thoại">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Địa chỉ khách hàng :</label>
-                    <div class="col-sm-10">
-                    <input type="text" class="form-control" id="" name="address" placeholder="Địa chỉ khách hàng" value="{{$user->address}}" >
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Loại tài khoản : <span style="color: red">*</span></label>
+                    <div class="col-sm-5">
+                        <select name="type" class="form-control mb-3" placeholder="Loại tài khoản" required>
+                            <option value="personal" {{$profile->type == 'personal' ? 'selected' : ''}}>Tài khoản cá nhân</option>
+                            <option value="bussiness" {{$profile->type == 'bussiness' ? 'selected' : ''}}>Tài khoản doanh nghiệp</option>
+                        </select>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Mở rộng :</label>
-                    <div class="col-sm-10">
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <select name="type" class="form-control mb-3" placeholder="Giá cũ của sản phẩm" value="{{$user->type}}">
-                                    <option value="personal">Khách hàng cá nhân</option>
-                                    <option value="bussiness">Khách hàng doanh nghiệp</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-7">
-                                <select name="isPublic" class="form-control mb-3" placeholder="Giá cũ của sản phẩm" value="{{$user->isPublic}}">
-                                    <option value="1">Public</option>
-                                    <option value="0">UnPublic</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                    {{-- <label class="col-sm-4 col-form-label" style="text-align: end;">Đã xác thực :</label>
+                    <div class="col-sm-1">
+                        <input type="checkbox" style="width: 30px; height: 30px;" class="form-check-input form-control float-right">
+                    </div> --}}
                 </div>
                 <div class="form-group row mt-3 float-right mr-1">
-                    <button id="btn-clear" type="reset" class="btn btn-secondary waves-effect waves-light mr-2">
-                        <span class="btn-label"><i class="fas fa-window-close"></i> </span>Đóng
+                    <button id="sendEmailBtn" type="button" class="btn btn-secondary waves-effect waves-light mr-2">
+                        <span class="btn-label"><i class="fas fa-envelope"></i></span>Gửi email xác thực
                     </button>
                     <button type="submit" class="btn btn-success waves-effect waves-light mr-2">
-                        <span class="btn-label"><i class="mdi mdi-content-save"></i> </span>Lưu thông tin
+                        <span class="btn-label"><i class="mdi mdi-content-save"></i> </span>Lưu
                     </button>
                 </div>
             </form>  
@@ -81,6 +62,63 @@
     </div>
 @stop
 @section('script')
+<script>
+    $(document).ready(function () {
 
-@stop
+        $('#editForm').submit(function (e) { 
+            const data = $(this).serializeArray()
+            e.preventDefault();
+            $.ajax({
+                type: "post",
+                url: "/users/{{$profile->userId}}/save-edit",
+                data: data,
+                dataType: "json",
+                success: function (response) {
+                    if(response && response.result === 'ok'){
+                        window.location.href = '/users';
+                    }
+                    else
+                    if(response.result === 'fail'){
+                        tata.warn('Thất bại', response.message, {
+                            duration: 5000,
+                            animate: 'slide',
+                            closeBtn: true,
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+
+        $('#sendEmailBtn').click(function (e) { 
+            $.ajax({
+                type: "post",
+                url: "/users/{{$profile->userId}}/send-email-verify",
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: "json",
+                success: function (response) {
+                    if(response && response.result === 'ok'){
+                        tata.success('Thành công', response.message, {
+                            duration: 5000,
+                            animate: 'slide',
+                            closeBtn: true,
+                        });
+                    }
+                    else
+                    if(response.result === 'fail'){
+                        tata.error('Thất bại', response.message, {
+                            duration: 5000,
+                            animate: 'slide',
+                            closeBtn: true,
+                        });
+                    }
+                }
+            });
+        });
+        
+    });
+</script>
+@endsection
 
