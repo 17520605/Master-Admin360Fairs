@@ -44,7 +44,7 @@
                                     <tr data-article-id='{{$article->id}}'>
                                         <td>{{$number++}}</td>
                                         <td>
-                                            <h6 href="app-product.html" class="font-weight-bold">{{$article->title}}</h6>
+                                            <h6 href="app-product.html" class="font-weight-bold text-width-500">{{$article->title}}</h6>
                                         </td>
                                         <td>
                                             <img src="{{$article->banner}}" class="rounded" height="70" width="140" style="object-fit: cover;">
