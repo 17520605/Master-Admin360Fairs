@@ -18,7 +18,7 @@ class UserController extends Controller
 {
     public function index()
     {   
-        $users = \App\Models\Users::where([
+        $users = \App\Models\User::where([
             ['type','touradmin']
         ])->get();
         foreach($users as $user)
