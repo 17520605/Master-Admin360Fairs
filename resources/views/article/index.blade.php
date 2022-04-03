@@ -37,9 +37,12 @@
                             </thead>
                             <tbody>
                                 @if(@isset($articles) > 0)
+                                    @php
+                                        $number = 1;
+                                    @endphp
                                     @foreach ($articles as $article)
                                     <tr data-article-id='{{$article->id}}'>
-                                        <td>{{$article->id}}</td>
+                                        <td>{{$number++}}</td>
                                         <td>
                                             <h6 href="app-product.html" class="font-weight-bold">{{$article->title}}</h6>
                                         </td>
@@ -47,7 +50,7 @@
                                             <img src="{{$article->banner}}" class="rounded" height="70" width="140" style="object-fit: cover;">
                                         </td>
                                         <td>
-                                            <button onclick="toggleVisiable(this)" class="btn waves-effect waves-light {{$article->is_hidden != 0 ? 'btn-secondary' : 'btn-success'  }}"><i class="fas {{$article->isPublic != 0 ? 'fa-eye-slash' : 'fa-eye'  }}"></i></button>
+                                            <button onclick="toggleVisiable(this)" class="btn waves-effect waves-light {{$article->is_hidden != 0 ? 'btn-success' : 'btn-secondary'}}">{{$article->isPublic != 0 ? 'UnPublic' : 'Public'  }}</button>
                                         </td>
                                         <td>
                                             {{$article->author}}
@@ -150,17 +153,15 @@
             dataType: "json",
             success: function (res) {
                 if(res.success === true){
-                    if(res.isHidden){
+                    if(res.isPublic){
                         $(target).removeClass('btn-success');
                         $(target).addClass('btn-secondary');
-                        $(target).find('i').removeClass('fa-eye');
-                        $(target).find('i').addClass('fa-eye-slash');
+                        $(target).text('UnPublic');
                     }
                     else{
                         $(target).removeClass('btn-secondary');
                         $(target).addClass('btn-success');
-                        $(target).find('i').removeClass('fa-eye-slash');
-                        $(target).find('i').addClass('fa-eye');
+                        $(target).text('Public');
                     }
 
                     tata.success('Thành công', 'Đã thay đổi thành công', {

@@ -8,7 +8,8 @@
         <meta property="og:type" content="website">
         <meta property="og:title" content="Trang quản trị - Hoàng Thịnh">
         <meta name="description" content="Sản phẩm mới Camera – Phụ kiện camera Anten – Dây cáp anten – Phụ kiện truyền hình Đầu thu truyền hình số – Tivi box – Điều khiển giọng nói Khung treo tivi – Loa – Tủ lạnh, máy giặt Điều khiển, remote Tivi – Máy lạnh – Quạt – Đầu thu Thiết bị,…">
-        <!-- App favicon -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        
         <link rel="icon" type="image/png" href="{{asset('shop/assets/images/favicon.svg')}}">
         <!-- App css -->
         <link href="{{asset('admin/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bootstrap-stylesheet">

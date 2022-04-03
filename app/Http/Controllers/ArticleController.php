@@ -6,10 +6,10 @@ use App\Models\Article;
 use App\Http\Requests\RequestArticle;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use App\Services\ArticleService;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Controller;
 
 class ArticleController extends Controller
 {
@@ -28,15 +28,17 @@ class ArticleController extends Controller
     {
         $title = $request->input('title');
         $slug = $request->input('slug');
-        $short_content = $request->input('short_content');
+        $shortDescription = $request->input('short_description');
         $content = $request->input('content');
         $file =  $request->file('files');
         $isPublic = $request->input('public');
-        
+        $author = $request->input('author');
         $banner = 'https://res.cloudinary.com/virtual-tour/image/upload/v1637651914/Background/webinar-default-poster_f23c8z.jpg';
-        if($file)
+        
+        if(isset($file))
         {
-            $banner = $this->uploadFile($file, true)->url;
+            $res = $this->uploadFile($file,true);
+            $banner = $res->url;
         }
 
         $article = new \App\Models\Article();
@@ -44,9 +46,11 @@ class ArticleController extends Controller
         $article->title = $title;
         $article->slug = $slug;
         $article->banner =  $banner;
-        $article->short_content = $short_content;
+        $article->shortDescription = $shortDescription;
         $article->content = $content;
-        $article->isPublic = $isPublic;
+        $article->author = $author;
+        $article->type = 'system';
+        $article->isPublic = isset($isPublic);
         $article->save();
 
         return redirect()->route('master.get.article.list-articles');
@@ -56,11 +60,7 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $article = Article::where('id', $id)->first();
-        $image = \App\Services\StorageService::getUrl($article->poster_id, 'original');
-        return view('article.edit')->with([
-            'article' => $article,
-            'image' => $image,
-        ]);
+        return view('article.edit')->with(['article' => $article]);
     }
 
     public function saveEdit($id, Request $request)
@@ -68,29 +68,34 @@ class ArticleController extends Controller
         $article = Article::where('id', $id)->first();
         $title = $request->input('title');
         $slug = $request->input('slug');
-        $short_content = $request->input('short_content');
+        $shortDescription = $request->input('short_description');
         $content = $request->input('content');
-        $hidden = $request->input('hidden');
+        $isPublic = $request->input('public');
+        $author = $request->input('author');
         $changedFiles = $request->input('changedFiles');
         
         if($article){
-            $image = $article->poster_id;
+            $banner = $article->banner;
             if($changedFiles == "1"){
                 $file = $request->file('file');
-                if(isset($file)){
-                    $assetId = \App\Services\StorageService::upload($file, $slug);
-                    $image = $assetId;
+                if(isset($file))
+                {
+                    $res = $this->uploadFile($file,true);
+                    $banner = $res->url;
                 }
                 else{
-                    $image = null;
+                    $banner = 'https://res.cloudinary.com/virtual-tour/image/upload/v1637651914/Background/webinar-default-poster_f23c8z.jpg';
                 }
             }
+
             $article->title = $title;
             $article->slug = $slug;
-            $article->poster_id = $image;
-            $article->short_content = $short_content;
+            $article->banner =  $banner;
+            $article->shortDescription = $shortDescription;
             $article->content = $content;
-            $article->is_hidden = (!isset($hidden));
+            $article->author = $author;
+            $article->type = 'system';
+            $article->isPublic = isset($isPublic);
             $article->save();
         }
         return redirect()->route('master.get.article.list-articles');;
@@ -115,19 +120,6 @@ class ArticleController extends Controller
         }
     }
 
-    public function uploadFile($file)
-    {   
-        $path = Storage::disk('temp')->putFile('/', $file);
-        $res = cloudinary()->upload(Storage::disk('temp')->path($file->hashName()), [
-            'resource_type' => 'auto'
-        ])->getResponse();
-        
-        // delete file
-        $path = Storage::disk('temp')->delete($path);
-
-        $resObj = json_decode(json_encode($res));
-        return $resObj;
-    }
 
     public function delete($id, Request $request)
     {

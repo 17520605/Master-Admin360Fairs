@@ -35,13 +35,13 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Hình ảnh  :</label>
                     <div class="col-sm-10 banner_article">
-                        <input type="file" name="files[]" class="dropify" data-max-file-size="10M" required>
+                        <input type="file" name="files" class="dropify" data-max-file-size="10M" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Mô tả ngắn về bài viêt:</label>
                     <div class="col-sm-10">
-                        <textarea name="short_content" class="form-control" rows="5" placeholder="Mô tả ngắn về bài viết"></textarea>
+                        <textarea name="short_description" class="form-control" rows="5" placeholder="Mô tả ngắn về bài viết"></textarea>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -94,7 +94,6 @@
             let slug = Utils.convertToSlug(name);
             $('#input-slug').val(slug);
         });
-
     </script>
 @stop
 

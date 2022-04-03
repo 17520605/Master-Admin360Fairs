@@ -12,7 +12,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ route('master.get.user.list-users')}}">
                             <i class="mdi mdi-account-multiple"></i>
                             <span> Account </span>
                         </a>

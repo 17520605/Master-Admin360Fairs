@@ -6,7 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use App\Models\Users;
+
+const TYPE_SPEAKER = 'speaker';
+const TYPE_PARTNER = 'partner';
+const TYPE_TOURADMIN = 'touradmin';
+const TYPE_SUPPERADMIN = 'superadmin';
 
 class AuthController extends Controller
 {
@@ -16,8 +21,9 @@ class AuthController extends Controller
             $url = $request->get('url');
             $email = $request->get('email');
 
-            $user = \App\Models\User::where([['email','=', $email],['type','=',\App\Models\User::TYPE_MASTERADMIN]])
-            ->orWhere([['email','=', $email],['type','=',\App\Models\User::TYPE_SUPPERADMIN]])->first();            if($user != null){
+            $user = \App\Models\User::where([['email','=', $email],['type','=',TYPE_SUPPERADMIN]])
+            ->orWhere([['email','=', $email],['type','=',TYPE_SUPPERADMIN]])->first();            
+            if($user != null){
                 if($user->isRequiredChangePassword == true || $user->password == null){
                     return view('auth.init_password', ['email' => $user->email]);
                 }
@@ -34,7 +40,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $type = Auth::user()->type;
-            if($type == \App\Models\User::TYPE_MASTERADMIN || $type == \App\Models\User::TYPE_SUPPERADMIN){
+            if($type == TYPE_MASTERADMIN || $type == TYPE_SUPPERADMIN){
                 
                 return redirect('/');
             }
@@ -44,6 +50,7 @@ class AuthController extends Controller
             return redirect()->back()->withInput();
         }
     }
+
     public function logout()
     {
         Auth::logout();

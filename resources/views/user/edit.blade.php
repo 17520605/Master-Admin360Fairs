@@ -8,101 +8,79 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Trang chủ</a></li>
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Bài viết</a></li>
-                                <li class="breadcrumb-item active">Chỉnh sửa bài viết</li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Tài khoản</a></li>
+                                <li class="breadcrumb-item active">Thêm mới tài khoản</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Chỉnh sửa bài viết</h4>
+                        <h4 class="page-title">Thêm mới tài khoản</h4>
                     </div>
                 </div>
             </div>
-            <form action="{{route('master.post.article.save-edit',$article->id)}}" method="POST" enctype="multipart/form-data">
-              @csrf
-              <div class="form-group row">
-                  <label for="inputEmail3" class="col-sm-2 col-form-label">Tên bài viết :</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="title_article" placeholder="Tên bài viết" value="{{$article->title}}" name="title">
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <label for="inputEmail3" class="col-sm-2 col-form-label">Slug :</label>
-                  <div class="col-sm-10">
-                      <div class="input-group--sa-slug input-group"><span class="input-group-text" id="form-category/slug-addon">https://hoangthinhsg.com/category/</span>
-                          <input id="input-slug" type="text" class="form-control" name="slug" value="{{$article->slug}}">
-                      </div>
-                  </div>
-              </div>
-              <div class="form-group row banner_article">
-                  <label for="inputEmail3" class="col-sm-2 col-form-label">Hình ảnh  :</label>
-                  <div class="col-sm-10 dropify-file-wrapper">
-                        <input type="hidden" class="changed" name="changedFiles" value="0">
-                        <input type="file" name="file" class="dropify" data-default-file="{{$image}}">
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <label for="inputEmail3" class="col-sm-2 col-form-label">Mô tả bài viêt:</label>
-                  <div class="col-sm-10">
-                      <textarea name="short_content" class="form-control" rows="5" placeholder="Mô tả ngắn về bài viết">{{$article->short_content}}</textarea>
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <label for="inputEmail3" class="col-sm-2 col-form-label">Nội dung bài viết :</label>
-                  <div class="col-sm-10">
-                      <textarea name="content" class="form-control" cols="30" rows="3" placeholder="Nội dung">{{$article->content}}</textarea>
-                  </div>
-              </div>
+            <form action="{{route('master.post.user.save-edit',$user->userId)}}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label"></label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Họ tên khách hàng hoặc tổ chức :</label>
                     <div class="col-sm-10">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="input-hidden" name="hidden" {{$article->is_hidden == 0 ? 'checked':''}} >
-                            <label class="custom-control-label" for="input-hidden">Hiển thị bài viết ngay</label>
+                    <input type="text" class="form-control" id="" name="name" placeholder="Họ tên khách hàng hoặc tổ chức" value="{{$user->name}}">
+                    </div>
+                </div>
+ 
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email khách hàng :</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id="" name="email" placeholder="Email khách hàng" value="{{$user->email}}" >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Số điện thoại khách hàng :</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id="" name="phone" placeholder="Số điện thoại khách hàng" value="{{$user->contact!=null?$user->contact:''}}" >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Password khách hàng :</label>
+                    <div class="col-sm-10">
+                    <input type="password" class="form-control" id="" name="password" placeholder="Password khách hàng">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Địa chỉ khách hàng :</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id="" name="address" placeholder="Địa chỉ khách hàng" value="{{$user->address}}" >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Mở rộng :</label>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <select name="type" class="form-control mb-3" placeholder="Giá cũ của sản phẩm" value="{{$user->type}}">
+                                    <option value="personal">Khách hàng cá nhân</option>
+                                    <option value="bussiness">Khách hàng doanh nghiệp</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-7">
+                                <select name="isPublic" class="form-control mb-3" placeholder="Giá cũ của sản phẩm" value="{{$user->isPublic}}">
+                                    <option value="1">Public</option>
+                                    <option value="0">UnPublic</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
-              <div class="form-group row mt-3 float-right mr-1">
-                    <button type="submit" class="btn btn-success waves-effect waves-light mr-2">
-                        <span class="btn-label"><i class="mdi mdi-content-save"></i> </span>Lưu bài viêt
-                    </button>
+                <div class="form-group row mt-3 float-right mr-1">
                     <button id="btn-clear" type="reset" class="btn btn-secondary waves-effect waves-light mr-2">
                         <span class="btn-label"><i class="fas fa-window-close"></i> </span>Đóng
                     </button>
-              </div>
-          </form>   
+                    <button type="submit" class="btn btn-success waves-effect waves-light mr-2">
+                        <span class="btn-label"><i class="mdi mdi-content-save"></i> </span>Lưu thông tin
+                    </button>
+                </div>
+            </form>  
         </div>
     </div>
 @stop
 @section('script')
-  <script>
-      CKEDITOR.replace('content');
-  </script>
-  <script>
-      $('#title_article').on('input', function () {  
-          let name = $(this).val();
-          let slug = Utils.convertToSlug(name);
-          $('#input-slug').val(slug);
-      });
 
-      $('.dropify-clear').click(function() {
-        let wrapper = $(this).parents('.dropify-file-wrapper');
-        wrapper.find('.changed').val(1);
-
-        let inputFile = wrapper.find('.dropify');
-        if(inputFile.attr('name') == 'file'){
-            inputFile.prop('required', true);
-        }
-    });
-
-    $('.dropify').click(function() {
-        let wrapper = $(this).parents('.dropify-file-wrapper');
-        wrapper.find('.changed').val(1);
-    });
-
-    $('#btn-clear').click(function () {  
-        let name = $(this).val();
-        let slug = Utils.convertToSlug(name);
-        $('#input-slug').val(slug);
-    });
-  </script>
-  
 @stop
+

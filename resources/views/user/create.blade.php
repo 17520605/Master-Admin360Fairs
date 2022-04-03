@@ -8,93 +8,77 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Trang chủ</a></li>
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Bài viết</a></li>
-                                <li class="breadcrumb-item active">Thêm mới bài viết</li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Tài khoản</a></li>
+                                <li class="breadcrumb-item active">Thêm mới tài khoản</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Thêm mới bài viết</h4>
+                        <h4 class="page-title">Thêm mới tài khoản</h4>
                     </div>
                 </div>
             </div>
-            <form action="{{route('master.post.article.save-create')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('master.post.user.save-create')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Tên bài viết :</label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Họ tên khách hàng hoặc tổ chức :</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" id="title_article" placeholder="Tên bài viết">
+                    <input type="text" class="form-control" id="" name="name" placeholder="Họ tên khách hàng hoặc tổ chức">
+                    </div>
+                </div>
+ 
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email khách hàng :</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id="" name="email" placeholder="Email khách hàng">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Slug :</label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Số điện thoại khách hàng :</label>
                     <div class="col-sm-10">
-                        <div class="input-group--sa-slug input-group"><span class="input-group-text" id="form-category/slug-addon">https://360fairs.com/article/</span>
-                            <input id="input-slug" type="text" class="form-control" name="slug" >
+                    <input type="text" class="form-control" id="" name="phone" placeholder="Số điện thoại khách hàng">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Password khách hàng :</label>
+                    <div class="col-sm-10">
+                    <input type="password" class="form-control" id="" name="password" placeholder="Password khách hàng">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Địa chỉ khách hàng :</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id="" name="address" placeholder="Địa chỉ khách hàng">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Mở rộng :</label>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <select name="type" class="form-control mb-3" placeholder="Giá cũ của sản phẩm" >
+                                    <option value="personal">Khách hàng cá nhân</option>
+                                    <option value="bussiness">Khách hàng doanh nghiệp</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-7">
+                                <select name="isPublic" class="form-control mb-3" placeholder="Giá cũ của sản phẩm" >
+                                    <option value="1">Public</option>
+                                    <option value="0">UnPublic</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Hình ảnh  :</label>
-                    <div class="col-sm-10 banner_article">
-                        <input type="file" name="files[]" class="dropify" data-max-file-size="10M" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Mô tả ngắn về bài viêt:</label>
-                    <div class="col-sm-10">
-                        <textarea name="short_content" class="form-control" rows="5" placeholder="Mô tả ngắn về bài viết"></textarea>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Nội dung bài viết :</label>
-                    <div class="col-sm-10">
-                        <textarea name="content" class="form-control" cols="30" rows="3" placeholder="Nội dung"></textarea>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Tên Tác giả :</label>
-                    <div class="col-sm-10">
-                    <input type="text" class="form-control" id="	author" placeholder="Tác giả" name="	author">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label"></label>
-                    <div class="col-sm-10">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="input-hidden" name="isPublic" checked>
-                            <label class="custom-control-label" for="input-hidden">Hiển thị bài viết ngay</label>
-                        </div>
-                    </div>
-                </div>
-   
                 <div class="form-group row mt-3 float-right mr-1">
                     <button id="btn-clear" type="reset" class="btn btn-secondary waves-effect waves-light mr-2">
                         <span class="btn-label"><i class="fas fa-window-close"></i> </span>Đóng
                     </button>
                     <button type="submit" class="btn btn-success waves-effect waves-light mr-2">
-                        <span class="btn-label"><i class="mdi mdi-content-save"></i> </span>Lưu bài viêt
+                        <span class="btn-label"><i class="mdi mdi-content-save"></i> </span>Lưu thông tin
                     </button>
                 </div>
             </form>  
         </div>
     </div>
 @stop
-@section('script')
-    <script>
-        CKEDITOR.replace('content');
-    </script>
-    <script>
-        $('#title_article').on('input', function () {  
-            let name = $(this).val();
-            let slug = Utils.convertToSlug(name);
-            $('#input-slug').val(slug);
-        });
-        
-        $('#btn-clear').click(function () {  
-            let name = $(this).val();
-            let slug = Utils.convertToSlug(name);
-            $('#input-slug').val(slug);
-        });
 
-    </script>
-@stop
 

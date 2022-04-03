@@ -36,13 +36,13 @@
                   <label for="inputEmail3" class="col-sm-2 col-form-label">Hình ảnh  :</label>
                   <div class="col-sm-10 dropify-file-wrapper">
                         <input type="hidden" class="changed" name="changedFiles" value="0">
-                        <input type="file" name="file" class="dropify" data-default-file="{{$image}}">
+                        <input type="file" name="file" class="dropify" data-default-file="{{$article->banner}}">
                   </div>
               </div>
               <div class="form-group row">
                   <label for="inputEmail3" class="col-sm-2 col-form-label">Mô tả bài viêt:</label>
                   <div class="col-sm-10">
-                      <textarea name="short_content" class="form-control" rows="5" placeholder="Mô tả ngắn về bài viết">{{$article->short_content}}</textarea>
+                      <textarea name="short_description" class="form-control" rows="5" placeholder="Mô tả ngắn về bài viết">{{$article->shortDescription}}</textarea>
                   </div>
               </div>
               <div class="form-group row">
@@ -51,11 +51,18 @@
                       <textarea name="content" class="form-control" cols="30" rows="3" placeholder="Nội dung">{{$article->content}}</textarea>
                   </div>
               </div>
+    
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Tên Tác giả :</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="author" placeholder="Tên Tác giả" value="{{$article->author}}" name="author">
+                    </div>
+                </div>
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label"></label>
                     <div class="col-sm-10">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="input-hidden" name="hidden" {{$article->is_hidden == 0 ? 'checked':''}} >
+                            <input type="checkbox" class="custom-control-input" id="input-public" name="public" {{$article->isPublic != 0 ? 'checked':''}} >
                             <label class="custom-control-label" for="input-hidden">Hiển thị bài viết ngay</label>
                         </div>
                     </div>
@@ -68,6 +75,8 @@
                         <span class="btn-label"><i class="fas fa-window-close"></i> </span>Đóng
                     </button>
               </div>
+              
+            </div>
           </form>   
         </div>
     </div>

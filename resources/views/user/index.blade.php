@@ -8,17 +8,17 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Trang chủ</a></li>
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Bài viết</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Tài khoản</a></li>
                                 <li class="breadcrumb-item active">Danh sách</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Quản lý bài viết</h4>
+                        <h4 class="page-title">Quản lý tài khoản</h4>
                     </div>
                 </div>
             </div>
-            <a type="button" href="{{ route('master.get.article.create') }}"
+            <a type="button" href="{{ route('master.get.user.create') }}"
                 class="btn btn-twitter waves-effect waves-light mb-3"><span class="btn-label"> <i
-                        class="fas fa-plus"></i></span> Thêm mới bài viết</a>
+                        class="fas fa-plus"></i></span> Thêm mới tài khoản</a>
             <div class="row">
                 <div class="col-12">
                     <div class="card-box">
@@ -30,23 +30,34 @@
                                     <th>Tên Tài khoản</th>
                                     <th>Hình ảnh</th>
                                     <th>Email</th>
-                                    <th>Số điện thoại</th>
-                                    <th>Loại tk</th>
+                                    <th>Loại Tài Khoản</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $number = 1;
+                                @endphp
                                 @if(@isset($users) > 0)
                                     @foreach ($users as $user)
                                     <tr data-user-id='{{$user->id}}'>
-                                        <td>{{$user->id}}</td>
+                                        <td>{{$number++}}</td>
                                         <td>
-                                            <h6 href="app-product.html" class="font-weight-bold">{{$user->userinfo->name}}</h6>
+                                            <h6 class="font-weight-bold">{{$user->userinfo->name}}</h6>
                                         </td>
-                                       
+                                        <td>
+                                            <img style="width: 80px; height: 80px;border-radius:50%;object-fit: cover " src="{{$user->userinfo->avatar!=null ? $user->userinfo->avatar : '/admin/assets/images/undraw_profile.svg'}}" alt="">
+                                        </td>
+                                        <td>
+                                            <h6>{{$user->userinfo->email}}</h6>
+                                            <h6>{{$user->userinfo->contact}}</h6>
+                                        </td>
+                                        <td>
+                                            <h6 class="font-weight-bold">{{$user->type}}</h6>
+                                        </td>
                                         <td> 
-                                            {{-- <a class="btn waves-effect waves-light btn-success" href="{{route('master.get.article.edit', $article->id)}}" ><i class="mdi mdi-pencil-outline"></i></a>
-                                            <button class="btn waves-effect waves-light btn-danger" onclick="openPopupDelete('{{$article->id}}')"><i class="mdi mdi-trash-can"> </i></button> --}}
+                                            <a class="btn waves-effect waves-light btn-success" href="{{route('master.get.user.edit', $user->id)}}" ><i class="mdi mdi-pencil-outline"></i></a>
+                                            <button class="btn waves-effect waves-light btn-danger" onclick="openPopupDelete('{{$user->id}}')"><i class="mdi mdi-trash-can"> </i></button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -61,7 +72,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="deleteArticle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <div class="modal fade" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -88,7 +99,7 @@
 
     function openPopupDelete(id) {  
         $('#confirmDeleteBtn').attr('data-id', id);
-        $('#deleteArticle').modal('show');
+        $('#deleteUser').modal('show');
     }
 
     function confirmDelete(target){
@@ -98,14 +109,14 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type: "delete",
-            url: "{{env('APP_URL')}}/master/article/" + id,
+            url: "{{env('APP_URL')}}/user/" + id,
             data: "data",
             dataType: "json",
             success: function (res) {
                 if(res.success === true){
-                    $('#deleteArticle').modal('hide');
+                    $('#deleteUser').modal('hide');
                     var table = $('#datatable').DataTable();
-                    var row = $('#datatable').find('tr[data-article-id="'+ id +'"]');
+                    var row = $('#datatable').find('tr[data-user-id="'+ id +'"]');
                     table.row(row).remove().draw();
                     tata.success('Thành công', 'Đã xóa bài viết', {
                         animate: 'slide',
@@ -129,49 +140,49 @@
     }
 
     function toggleVisiable(target){
-            let id = $(target).parents('tr').attr('data-article-id');
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: "post",
-                url: "{{env('APP_URL')}}/master/article/" + id + "/toggle-visiable",
-                dataType: "json",
-                success: function (res) {
-                    if(res.success === true){
-                        if(res.isHidden){
-                            $(target).removeClass('btn-success');
-                            $(target).addClass('btn-secondary');
-                            $(target).find('i').removeClass('fa-eye');
-                            $(target).find('i').addClass('fa-eye-slash');
-                        }
-                        else{
-                            $(target).removeClass('btn-secondary');
-                            $(target).addClass('btn-success');
-                            $(target).find('i').removeClass('fa-eye-slash');
-                            $(target).find('i').addClass('fa-eye');
-                        }
-
-                        tata.success('Thành công', 'Đã thay đổi thành công', {
-                            animate: 'slide',
-                            closeBtn: true,
-                        })
+        let id = $(target).parents('tr').attr('data-article-id');
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: "post",
+            url: "{{env('APP_URL')}}/user/" + id + "/toggle-visiable",
+            dataType: "json",
+            success: function (res) {
+                if(res.success === true){
+                    if(res.isHidden){
+                        $(target).removeClass('btn-success');
+                        $(target).addClass('btn-secondary');
+                        $(target).find('i').removeClass('fa-eye');
+                        $(target).find('i').addClass('fa-eye-slash');
                     }
                     else{
-                        tata.error('Lỗi', res.errors, {
-                            animate: 'slide',
-                            closeBtn: true,
-                        })
+                        $(target).removeClass('btn-secondary');
+                        $(target).addClass('btn-success');
+                        $(target).find('i').removeClass('fa-eye-slash');
+                        $(target).find('i').addClass('fa-eye');
                     }
-                },
-                error: function(){
-                    tata.error('Lỗi', "Cập nhật thất bại", {
+
+                    tata.success('Thành công', 'Đã thay đổi thành công', {
                         animate: 'slide',
                         closeBtn: true,
-                    });
+                    })
                 }
-            });
-        }
+                else{
+                    tata.error('Lỗi', res.errors, {
+                        animate: 'slide',
+                        closeBtn: true,
+                    })
+                }
+            },
+            error: function(){
+                tata.error('Lỗi', "Cập nhật thất bại", {
+                    animate: 'slide',
+                    closeBtn: true,
+                });
+            }
+        });
+    }
 </script>
 @stop
 
