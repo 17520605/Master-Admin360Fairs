@@ -17,31 +17,28 @@
                                     <h5 class="text-muted text-uppercase py-3 font-16">Đăng nhập trang quản lý</h5>
                                 </div>
 
-                                <form class="mt-2" method="POST" action="{{env('APP_URL')}}/login" enctype="multipart/form-data">
+                                <form id="loginForm" class="mt-2">
                                     @csrf
                                     <div class="form-group mb-3">
                                         <label for="email" class="control-label sr-only">Email</label>
-                                        <input type="email" name="email" class="form-control" id="email" placeholder="Email" required>
+                                        <input type="email" name="email" value="{{$email}}" class="form-control" id="email" placeholder="Email" required>
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="password" class="control-label sr-only">Password</label>
                                         <input type="password" name="password" class="form-control" id="password" value="" placeholder="Password" required>
                                     </div>
-                                    <div class="form-group mb-3">
+                                    {{-- <div class="form-group mb-3">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="checkbox-signin" checked="">
                                             <label class="custom-control-label" for="checkbox-signin">Nhớ đăng nhập</label>
                                         </div>
-                                    </div>
-
+                                    </div> --}}
                                     <div class="form-group text-center">
                                         <button class="btn btn-success btn-block waves-effect waves-light" type="submit"> Đăng nhập </button>
                                     </div>
 
-                                    <a href="pages-recoverpw.html" class="text-muted"><i class="mdi mdi-lock mr-1"></i> Quên mật khẩu?</a>
-                                    @if($notif != null || $notif != '')
-                                        <section class='alert alert-danger text-center'>{{$notif}}</section>
-                                    @endif
+                                    {{-- <a href="pages-recoverpw.html" class="text-muted"><i class="mdi mdi-lock mr-1"></i> Quên mật khẩu?</a> --}}
+                                    <section id="message" class='alert alert-danger text-center' style="display: none"></section>
                                 </form>
                             </div>
                             <!-- end card-body -->
@@ -57,3 +54,37 @@
     </div>
     <!-- End Content-->
 @stop
+
+@section('script')
+<script>
+    const url = new URL(location.href);
+
+    $('#loginForm').submit(function (e) { 
+        e.preventDefault();
+        $('#message').hide();
+        const data = $(this).serializeArray();
+        $.ajax({
+            type: "post",
+            url: "/login",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                if(response && response.result === 'ok'){
+                    if(url.searchParams.callback){
+                        $('#message').text(response.message).show();
+                        location.href = url.searchParams.callback;
+                    }
+                    else{
+                        location.href = '/';
+                    }
+                }
+                else
+                if(response.result === 'fail'){
+                    $('#message').text(response.message).show();
+                }
+            }
+        });
+        return false;
+    });
+</script>
+@endsection

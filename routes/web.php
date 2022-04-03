@@ -1,10 +1,8 @@
 <?php
     use Illuminate\Support\Facades\Route;
 
-    Route::prefix('authenticate')->group(function() {
-        Route::match(['get', 'post'], '/login', 'AuthController@login')->name('login');
-        Route::get('/logout', 'AuthController@logout');
-    });
+    Route::match(['get', 'post'], '/login', 'AuthController@login')->name('login');
+    Route::get('/logout', 'AuthController@logout');
     
     Route::middleware('auth')->group(function (){
         Route::get('/', 'AdminController@index')->name('admin.home');

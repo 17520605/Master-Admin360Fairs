@@ -75,7 +75,7 @@
                 <div class="dropdown-divider"></div>
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <a href="/logout" class="dropdown-item notify-item">
                     <i class="mdi mdi-logout-variant"></i>
                     <span>Đăng xuất</span>
                 </a>

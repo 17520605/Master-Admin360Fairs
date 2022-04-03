@@ -10,7 +10,7 @@ use Illuminate\Routing\Controller;
 use App\Services\ArticleService;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Users;
+use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Input;
 
@@ -42,20 +42,20 @@ class UserController extends Controller
         $address = $request->input('address');
         $type = $request->input('type');
         $isPublic = $request->input('isPublic');
-        $user = Users::where('email', $email)->first();
+        $user = User::where('email', $email)->first();
         if($user != null){
            
         }
         else{
             $random = Str::random(45);
-            $user = new Users;
+            $user = new User;
             $user->email = $email;
             $user->password = bcrypt($password);
             $user->level = 40;
             $user->accessToken = $random;
             $user->type = 'touradmin';
             $user->save();
-            $userId = Users::where('email', $email)->first();
+            $userId = User::where('email', $email)->first();
             if($userId != null){
                 $userId = $userId->id;
                 $profile = new Profile;
@@ -87,7 +87,7 @@ class UserController extends Controller
         $address = $request->input('address');
         $type = $request->input('type');
         $isPublic = $request->input('isPublic');
-        $user = Users::where('id', $userId)->first();
+        $user = User::where('id', $userId)->first();
         if($password == null){
             $password = $user->password;
         }
@@ -133,7 +133,7 @@ class UserController extends Controller
 
     public function delete($id, Request $request)
     {
-        $User = Users::where('id', $id)->first();
+        $User = User::where('id', $id)->first();
         if(isset($User)){
             $User->delete();
             $Profile = Profile::where('userId', $id)->first();
