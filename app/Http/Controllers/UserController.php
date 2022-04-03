@@ -20,13 +20,13 @@ class UserController extends Controller
     {   
         $users = \App\Models\User::where([
             ['type','touradmin']
-        ])->get();
+        ])-> get();
         foreach($users as $user)
         {
-            $userinfo = \App\Models\Profile::where('userId',  $user->id)->first();
-            $user->userinfo = $userinfo;
+            $userinfo = \App\Models\Profile::where('userId',  $user-> id)-> first();
+            $user-> userinfo = $userinfo;
         }
-        return view('user.index', ['users'=> $users]);
+        return view('user.index', ['users'=>  $users]);
     }
     public function create()
     {
@@ -35,97 +35,97 @@ class UserController extends Controller
 
     public function saveCreate(Request $request)
     {
-        $name = $request->input('name');
-        $phone = $request->input('phone');
-        $email = $request->input('email');
-        $password = $request->input('password');
-        $address = $request->input('address');
-        $type = $request->input('type');
-        $isPublic = $request->input('isPublic');
-        $user = User::where('email', $email)->first();
+        $name = $request-> input('name');
+        $phone = $request-> input('phone');
+        $email = $request-> input('email');
+        $password = $request-> input('password');
+        $address = $request-> input('address');
+        $type = $request-> input('type');
+        $isPublic = $request-> input('isPublic');
+        $user = User::where('email', $email)-> first();
         if($user != null){
            
         }
         else{
             $random = Str::random(45);
             $user = new User;
-            $user->email = $email;
-            $user->password = bcrypt($password);
-            $user->level = 40;
-            $user->accessToken = $random;
-            $user->type = 'touradmin';
-            $user->save();
-            $userId = User::where('email', $email)->first();
+            $user-> email = $email;
+            $user-> password = bcrypt($password);
+            $user-> level = 40;
+            $user-> accessToken = $random;
+            $user-> type = 'touradmin';
+            $user-> save();
+            $userId = User::where('email', $email)-> first();
             if($userId != null){
-                $userId = $userId->id;
+                $userId = $userId-> id;
                 $profile = new Profile;
-                $profile->name =$name;
-                $profile->email = $email;
-                $profile->userId =$userId;
-                $profile->contact =$phone;
-                $profile->address =$address;
-                $profile->type = $type;
-                $profile->save();
+                $profile-> name =$name;
+                $profile-> email = $email;
+                $profile-> userId =$userId;
+                $profile-> contact =$phone;
+                $profile-> address =$address;
+                $profile-> type = $type;
+                $profile-> save();
             }
         }
-        return redirect()->route('master.get.user.list-users');
+        return redirect()-> route('master.get.user.list-users');
     }
 
     public function edit($id)
     {
-        $user = Profile::where('UserId', $id)->first();
-        return view('user.edit')->with(['user' => $user]);
+        $user = Profile::where('UserId', $id)-> first();
+        return view('user.edit')-> with(['user' =>  $user]);
     }
 
     public function saveEdit($id, Request $request)
     {
         $userId = $id;
-        $name = $request->input('name');
-        $phone = $request->input('phone');
-        $email = $request->input('email');
-        $password = $request->input('password');
-        $address = $request->input('address');
-        $type = $request->input('type');
-        $isPublic = $request->input('isPublic');
-        $user = User::where('id', $userId)->first();
+        $name = $request-> input('name');
+        $phone = $request-> input('phone');
+        $email = $request-> input('email');
+        $password = $request-> input('password');
+        $address = $request-> input('address');
+        $type = $request-> input('type');
+        $isPublic = $request-> input('isPublic');
+        $user = User::where('id', $userId)-> first();
         if($password == null){
-            $password = $user->password;
+            $password = $user-> password;
         }
         else
         {
             $password = bcrypt($password);
         }
 
-        $user->email = $email;
-        $user->password = $password;
-        $user->save();
-        $profile = Profile::where('UserId', $id)->first();
-        $profile->name =$name;
-        $profile->email = $email;
-        $profile->userId =$userId;
-        $profile->contact =$phone;
-        $profile->address =$address;
-        $profile->type = $type;
-        $profile->save();
+        $user-> email = $email;
+        $user-> password = $password;
+        $user-> save();
+        $profile = Profile::where('UserId', $id)-> first();
+        $profile-> name =$name;
+        $profile-> email = $email;
+        $profile-> userId =$userId;
+        $profile-> contact =$phone;
+        $profile-> address =$address;
+        $profile-> type = $type;
+        $profile-> save();
 
-        return redirect()->route('master.get.user.list-users');
+        return redirect()-> route('master.get.user.list-users');
     }
 
     public function toggleVisiable($id, Request $request)
     {
-        $article = Article::where('id', $id)->first();
+        $article = Article::where('id', $id)-> first();
         if(isset($article)){
-            $article->isPublic = !$article->isPublic;
-            $article->save();
+            $article-> isPublic = !$article-> isPublic;
+            $article-> save();
             return [
-                'success' => true,
-                'isHidden' => $article->isPublic,
+                'success' =>  true,
+                'isHidden' =>  $article-> isPublic,
             ]; 
         }
         else{
             return [
-                'success' => false,
-                'errors' => 'Thao tác thát bại'
+                'success' =>  false,
+                'errors' =>  'Thao tác thát bại'
             ]; 
         }
     }
@@ -133,21 +133,21 @@ class UserController extends Controller
 
     public function delete($id, Request $request)
     {
-        $User = User::where('id', $id)->first();
+        $User = User::where('id', $id)-> first();
         if(isset($User)){
-            $User->delete();
-            $Profile = Profile::where('userId', $id)->first();
+            $User-> delete();
+            $Profile = Profile::where('userId', $id)-> first();
             if(isset($Profile)){
-                $Profile->delete();
+                $Profile-> delete();
             }
             return [
-                'success' => true
+                'success' =>  true
             ]; 
         }
         else{
             return [
-                'success' => false,
-                'errors' => 'Xóa thất bại'
+                'success' =>  false,
+                'errors' =>  'Xóa thất bại'
             ]; 
         }
     }

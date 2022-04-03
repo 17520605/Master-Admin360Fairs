@@ -16,7 +16,7 @@ class ArticleController extends Controller
     public function index()
     {   
         $articles = ArticleService::getAll();
-        return view('article.index', ['articles'=> $articles]);
+        return view('article.index', ['articles'=>  $articles]);
     }
 
     public function create()
@@ -26,96 +26,96 @@ class ArticleController extends Controller
 
     public function saveCreate(Request $request)
     {
-        $title = $request->input('title');
-        $slug = $request->input('slug');
-        $shortDescription = $request->input('short_description');
-        $content = $request->input('content');
-        $file =  $request->file('files');
-        $isPublic = $request->input('public');
-        $author = $request->input('author');
+        $title = $request-> input('title');
+        $slug = $request-> input('slug');
+        $shortDescription = $request-> input('short_description');
+        $content = $request-> input('content');
+        $file =  $request-> file('files');
+        $isPublic = $request-> input('public');
+        $author = $request-> input('author');
         $banner = 'https://res.cloudinary.com/virtual-tour/image/upload/v1637651914/Background/webinar-default-poster_f23c8z.jpg';
         
         if(isset($file))
         {
-            $res = $this->uploadFile($file,true);
-            $banner = $res->url;
+            $res = $this-> uploadFile($file,true);
+            $banner = $res-> url;
         }
 
         $article = new \App\Models\Article();
         
-        $article->title = $title;
-        $article->slug = $slug;
-        $article->banner =  $banner;
-        $article->shortDescription = $shortDescription;
-        $article->content = $content;
-        $article->author = $author;
-        $article->type = 'system';
-        $article->isPublic = isset($isPublic);
-        $article->save();
+        $article-> title = $title;
+        $article-> slug = $slug;
+        $article-> banner =  $banner;
+        $article-> shortDescription = $shortDescription;
+        $article-> content = $content;
+        $article-> author = $author;
+        $article-> type = 'system';
+        $article-> isPublic = isset($isPublic);
+        $article-> save();
 
-        return redirect()->route('master.get.article.list-articles');
+        return redirect()-> route('master.get.article.list-articles');
 
     }
 
     public function edit($id)
     {
-        $article = Article::where('id', $id)->first();
-        return view('article.edit')->with(['article' => $article]);
+        $article = Article::where('id', $id)-> first();
+        return view('article.edit')-> with(['article' =>  $article]);
     }
 
     public function saveEdit($id, Request $request)
     {
-        $article = Article::where('id', $id)->first();
-        $title = $request->input('title');
-        $slug = $request->input('slug');
-        $shortDescription = $request->input('short_description');
-        $content = $request->input('content');
-        $isPublic = $request->input('public');
-        $author = $request->input('author');
-        $changedFiles = $request->input('changedFiles');
+        $article = Article::where('id', $id)-> first();
+        $title = $request-> input('title');
+        $slug = $request-> input('slug');
+        $shortDescription = $request-> input('short_description');
+        $content = $request-> input('content');
+        $isPublic = $request-> input('public');
+        $author = $request-> input('author');
+        $changedFiles = $request-> input('changedFiles');
         
         if($article){
-            $banner = $article->banner;
+            $banner = $article-> banner;
             if($changedFiles == "1"){
-                $file = $request->file('file');
+                $file = $request-> file('file');
                 if(isset($file))
                 {
-                    $res = $this->uploadFile($file,true);
-                    $banner = $res->url;
+                    $res = $this-> uploadFile($file,true);
+                    $banner = $res-> url;
                 }
                 else{
                     $banner = 'https://res.cloudinary.com/virtual-tour/image/upload/v1637651914/Background/webinar-default-poster_f23c8z.jpg';
                 }
             }
 
-            $article->title = $title;
-            $article->slug = $slug;
-            $article->banner =  $banner;
-            $article->shortDescription = $shortDescription;
-            $article->content = $content;
-            $article->author = $author;
-            $article->type = 'system';
-            $article->isPublic = isset($isPublic);
-            $article->save();
+            $article-> title = $title;
+            $article-> slug = $slug;
+            $article-> banner =  $banner;
+            $article-> shortDescription = $shortDescription;
+            $article-> content = $content;
+            $article-> author = $author;
+            $article-> type = 'system';
+            $article-> isPublic = isset($isPublic);
+            $article-> save();
         }
-        return redirect()->route('master.get.article.list-articles');;
+        return redirect()-> route('master.get.article.list-articles');;
     }
 
     public function toggleVisiable($id, Request $request)
     {
-        $article = Article::where('id', $id)->first();
+        $article = Article::where('id', $id)-> first();
         if(isset($article)){
-            $article->isPublic = !$article->isPublic;
-            $article->save();
+            $article-> isPublic = !$article-> isPublic;
+            $article-> save();
             return [
-                'success' => true,
-                'isHidden' => $article->isPublic,
+                'success' =>  true,
+                'isHidden' =>  $article-> isPublic,
             ]; 
         }
         else{
             return [
-                'success' => false,
-                'errors' => 'Thao tác thát bại'
+                'success' =>  false,
+                'errors' =>  'Thao tác thát bại'
             ]; 
         }
     }
@@ -123,17 +123,17 @@ class ArticleController extends Controller
 
     public function delete($id, Request $request)
     {
-        $article = Article::where('id', $id)->first();
+        $article = Article::where('id', $id)-> first();
         if(isset($article)){
-            $article->delete();
+            $article-> delete();
             return [
-                'success' => true
+                'success' =>  true
             ]; 
         }
         else{
             return [
-                'success' => false,
-                'errors' => 'Xóa thất bại'
+                'success' =>  false,
+                'errors' =>  'Xóa thất bại'
             ]; 
         }
     }

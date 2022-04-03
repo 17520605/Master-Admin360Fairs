@@ -800,7 +800,7 @@ body input.navigation-b ul li a:hover:hover {
 .icon-close:after {
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAUlJREFUOBGllDFuwzAMRe3Cd+jYKUCzd/XkDtm9dsoVOuUqBnqBoodwgBwiW8ZsXTIWqPu+Iia0LMAoTOBbJEV+UZTkosjIMAwN6MARXCKky9dkUsYuglagB3OimNU4O1pM1OB7jsHNK7YekeFQJZ5kj/0LcnLA+RMnlHOvDMNv5wO7BFuQkn3hq0ALjKwPVeF4BSaqpLRy0T1ZIHFz75bE2BR8dBImqmBrwRplg09QmR/9GZyBSadAHauXCZkRROKURLlHEemepJIlIyhHotzLg1/N6erTxtmmvqA8muHGIbc1rTBqrEuwnqWnGbbmmz0hwaHtvM2QhWbrXZnosvnTWWPrdCY9w7cDJtf3h9VHjy5Zq9UZ08beyJh7Aicg6W/VYvgnIjJdNn9PMIOITJWcgnV9VvcnEitY/mitNFZZ/hsxsljdv39sfybRQ4R/kU0MAAAAAElFTkSuQmCC");
 }
-.ie8 .switch > * {
+.ie8 .switch >  * {
   vertical-align: middle;
 }
 .ie8 .switch input[type="radio"] {
@@ -902,7 +902,7 @@ body input.navigation-b ul li a:hover:hover {
 .switch:hover .switch-inner .handler:before {
   background: #029ef3;
 }
-.switch input[data-num="2"]:checked ~ .switch-inner > .handler {
+.switch input[data-num="2"]:checked ~ .switch-inner >  .handler {
   margin-left: auto;
 }
 .switch input[data-num="2"]:checked ~ label[data-for="1"] {
@@ -996,8 +996,8 @@ body input.navigation-b ul li a:hover:hover {
 }
 main .grid-container,
 header .grid-container,
-.navigation-a > div,
-footer > div {
+.navigation-a >  div,
+footer >  div {
   max-width: 968px;
 }
 .header-a {
@@ -1057,8 +1057,8 @@ footer > div {
 }
 main .grid-container,
 header .grid-container,
-.navigation-a > div,
-footer > div {
+.navigation-a >  div,
+footer >  div {
   max-width: 1052px;
 }
 main .grid-container.freed-width {
@@ -1108,25 +1108,25 @@ main .grid-container.freed-width {
 #info-box {
   padding-bottom: 0;
 }
-#info-box > div {
+#info-box >  div {
   width: 100%;
   text-align: right;
 }
-#info-box > div .toggler {
+#info-box >  div .toggler {
   padding-right: 0;
 }
-#info-box > div .toggler:hover {
+#info-box >  div .toggler:hover {
   background: transparent;
   color: #000;
 }
-#info-box > div .toggler:hover > label {
+#info-box >  div .toggler:hover >  label {
   text-decoration: underline;
 }
-#info-box > div h2 {
+#info-box >  div h2 {
   float: left;
   margin-top: 0;
 }
-#info-box > div#instructions-container {
+#info-box >  div#instructions-container {
   text-align: left;
 }
 #toolbarModifierWrapper {
@@ -1304,84 +1304,84 @@ div.toolbarModifier.empty-visible .empty {
   -moz-opacity: 0.6;
   opacity: 0.6;
 }
-div.toolbarModifier .empty > p {
+div.toolbarModifier .empty >  p {
   line-height: 31px;
 }
-div.toolbarModifier > ul {
+div.toolbarModifier >  ul {
   padding: 0;
   margin: 0;
   border-top: 1px solid #ccc;
   width: 100%;
 }
-div.toolbarModifier > ul[data-type="table-header"] {
+div.toolbarModifier >  ul[data-type="table-header"] {
   display: table-header-group;
 }
-div.toolbarModifier > ul[data-type="table-body"] {
+div.toolbarModifier >  ul[data-type="table-body"] {
   display: table-row-group;
 }
-div.toolbarModifier > ul p {
+div.toolbarModifier >  ul p {
   padding: 0;
   margin: 0;
 }
-div.toolbarModifier > ul > li {
+div.toolbarModifier >  ul >  li {
   display: table-row;
 }
-div.toolbarModifier > ul > li[data-type="header"] {
+div.toolbarModifier >  ul >  li[data-type="header"] {
   font-weight: bold;
   user-select: none;
   cursor: default;
 }
-div.toolbarModifier > ul > li[data-type="group"],
-div.toolbarModifier > ul > li[data-type="separator"] {
+div.toolbarModifier >  ul >  li[data-type="group"],
+div.toolbarModifier >  ul >  li[data-type="separator"] {
   border-bottom: 1px solid #ccc;
 }
-div.toolbarModifier > ul > li[data-type="subgroup"] {
+div.toolbarModifier >  ul >  li[data-type="subgroup"] {
   border-top: 1px solid #eee;
 }
-div.toolbarModifier > ul > li[data-type="subgroup"]:first-child {
+div.toolbarModifier >  ul >  li[data-type="subgroup"]:first-child {
   border-top: none;
 }
-div.toolbarModifier > ul > li[data-type="group"].active,
-div.toolbarModifier > ul > li[data-type="group"]:hover,
-div.toolbarModifier > ul > li[data-type="separator"].active,
-div.toolbarModifier > ul > li[data-type="separator"]:hover {
+div.toolbarModifier >  ul >  li[data-type="group"].active,
+div.toolbarModifier >  ul >  li[data-type="group"]:hover,
+div.toolbarModifier >  ul >  li[data-type="separator"].active,
+div.toolbarModifier >  ul >  li[data-type="separator"]:hover {
   overflow: hidden;
   z-index: 2;
 }
-div.toolbarModifier > ul > li[data-type="group"].active,
-div.toolbarModifier > ul > li[data-type="separator"].active,
-div.toolbarModifier > ul > li[data-type="group"].active:hover,
-div.toolbarModifier > ul > li[data-type="separator"].active:hover {
+div.toolbarModifier >  ul >  li[data-type="group"].active,
+div.toolbarModifier >  ul >  li[data-type="separator"].active,
+div.toolbarModifier >  ul >  li[data-type="group"].active:hover,
+div.toolbarModifier >  ul >  li[data-type="separator"].active:hover {
   background: #f0fafb;
 }
-div.toolbarModifier > ul > li[data-type="group"]:hover,
-div.toolbarModifier > ul > li[data-type="separator"]:hover {
+div.toolbarModifier >  ul >  li[data-type="group"]:hover,
+div.toolbarModifier >  ul >  li[data-type="separator"]:hover {
   background: #fffbe3;
 }
-div.toolbarModifier > ul > li[data-type="separator"] {
+div.toolbarModifier >  ul >  li[data-type="separator"] {
   background: #f5f5f5;
 }
-div.toolbarModifier > ul > li[data-type="separator"]:after {
+div.toolbarModifier >  ul >  li[data-type="separator"]:after {
   content: '';
   width: 100%;
 }
-div.toolbarModifier > ul > li[data-type="separator"] > p {
+div.toolbarModifier >  ul >  li[data-type="separator"] >  p {
   padding: 2px 5px;
 }
-div.toolbarModifier > ul > li > p,
-div.toolbarModifier > ul > li > ul {
+div.toolbarModifier >  ul >  li >  p,
+div.toolbarModifier >  ul >  li >  ul {
   display: table-cell;
   vertical-align: middle;
 }
-div.toolbarModifier > ul > li p {
+div.toolbarModifier >  ul >  li p {
   padding-left: 5px;
   min-width: 200px;
 }
-div.toolbarModifier > ul > li p span {
+div.toolbarModifier >  ul >  li p span {
   white-space: nowrap;
   cursor: default;
 }
-div.toolbarModifier > ul > li p span button {
+div.toolbarModifier >  ul >  li p span button {
   font-size: 12.666px;
   margin-right: 5px;
   cursor: pointer;
@@ -1397,13 +1397,13 @@ div.toolbarModifier > ul > li p span button {
   line-height: 12px;
   height: 20px;
 }
-div.toolbarModifier > ul > li p span button:not(.disabled):hover,
-div.toolbarModifier > ul > li p span button:not(.disabled):focus {
+div.toolbarModifier >  ul >  li p span button:not(.disabled):hover,
+div.toolbarModifier >  ul >  li p span button:not(.disabled):focus {
   color: #fff;
   background-color: #454545;
   border-color: transparent;
 }
-div.toolbarModifier > ul > li p span button.move.disabled {
+div.toolbarModifier >  ul >  li p span button.move.disabled {
   cursor: default;
   zoom: 1;
   filter: alpha(opacity=20);
@@ -1411,23 +1411,23 @@ div.toolbarModifier > ul > li p span button.move.disabled {
   -moz-opacity: 0.2;
   opacity: 0.2;
 }
-div.toolbarModifier > ul > li ul {
+div.toolbarModifier >  ul >  li ul {
   border-collapse: collapse;
   padding: 0;
   width: 100%;
 }
-div.toolbarModifier > ul > li ul li {
+div.toolbarModifier >  ul >  li ul li {
   display: table-row;
   list-style-type: none;
   line-height: 1;
 }
-div.toolbarModifier > ul > li ul li[data-type="subgroup"] {
+div.toolbarModifier >  ul >  li ul li[data-type="subgroup"] {
   border-top: 1px solid #ddd;
 }
-div.toolbarModifier > ul > li ul li[data-type="subgroup"]:first-child {
+div.toolbarModifier >  ul >  li ul li[data-type="subgroup"]:first-child {
   border-top: 0;
 }
-div.toolbarModifier > ul > li ul li[data-type="subgroup"] [data-type="button"] {
+div.toolbarModifier >  ul >  li ul li[data-type="subgroup"] [data-type="button"] {
   -webkit-border-radius: 3px;
   -webkit-background-clip: padding-box;
   -moz-border-radius: 3px;
@@ -1436,32 +1436,32 @@ div.toolbarModifier > ul > li ul li[data-type="subgroup"] [data-type="button"] {
   background-clip: padding-box;
   padding: 0 2px;
 }
-div.toolbarModifier > ul > li ul li[data-type="subgroup"] [data-type="button"]:focus {
+div.toolbarModifier >  ul >  li ul li[data-type="subgroup"] [data-type="button"]:focus {
   background: rgba(0, 0, 0, 0.04);
 }
-div.toolbarModifier > ul > li ul li[data-type="subgroup"] [data-type="button"] input {
+div.toolbarModifier >  ul >  li ul li[data-type="subgroup"] [data-type="button"] input {
   vertical-align: middle;
 }
-div.toolbarModifier > ul > li ul li > p,
-div.toolbarModifier > ul > li ul li > ul {
+div.toolbarModifier >  ul >  li ul li >  p,
+div.toolbarModifier >  ul >  li ul li >  ul {
   display: table-cell;
   vertical-align: middle;
 }
-div.toolbarModifier > ul > li ul li ul {
+div.toolbarModifier >  ul >  li ul li ul {
   padding: 0;
 }
-div.toolbarModifier > ul > li ul li ul li {
+div.toolbarModifier >  ul >  li ul li ul li {
   padding: 0;
   display: inline-block;
   cursor: pointer;
   margin: 2px 5px 2px 0;
 }
-div.toolbarModifier > ul > li ul li ul li .cke_combo_text {
+div.toolbarModifier >  ul >  li ul li ul li .cke_combo_text {
   cursor: pointer;
   white-space: nowrap;
 }
-div.toolbarModifier > ul > li ul li ul li .cke_toolgroup,
-div.toolbarModifier > ul > li ul li ul li .cke_combo_button {
+div.toolbarModifier >  ul >  li ul li ul li .cke_toolgroup,
+div.toolbarModifier >  ul >  li ul li ul li .cke_combo_button {
   cursor: pointer;
   margin: 0;
   vertical-align: middle;
@@ -1471,7 +1471,7 @@ div.toolbarModifier > ul > li ul li ul li .cke_combo_button {
   line-height: 20.54px;
   line-height: 1.28rem;
 }
-div.toolbarModifier > .codemirror-wrapper {
+div.toolbarModifier >  .codemirror-wrapper {
   overflow-y: auto;
 }
 div.toolbarModifier-hints {
@@ -1501,7 +1501,7 @@ div.toolbarModifier-hints dl .list-header {
   border: 0;
   padding-bottom: 0.6em;
 }
-div.toolbarModifier-hints dl > p {
+div.toolbarModifier-hints dl >  p {
   text-align: center;
 }
 div.toolbarModifier-hints dl dt {
@@ -1596,7 +1596,7 @@ div.toolbarModifier-hints dl dd:after {
   color: #575757;
   background: #f0fafb;
 }
-.CodeMirror-hints.toolbar-modifier > li:hover {
+.CodeMirror-hints.toolbar-modifier >  li:hover {
   background: #fffbe3;
 }
 /* Text modifier */
@@ -1617,13 +1617,13 @@ div.toolbarModifier-hints dl dd:after {
   width: 100%;
   z-index: 10;
 }
-.staticContainer > .grid-container {
+.staticContainer >  .grid-container {
   max-width: 1052px;
 }
-.staticContainer > .grid-container .inner {
+.staticContainer >  .grid-container .inner {
   background: #fff;
 }
-.staticContainer > .grid-container .inner .toolbar {
+.staticContainer >  .grid-container .inner .toolbar {
   margin-bottom: 0;
 }
 #help {

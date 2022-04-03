@@ -287,14 +287,14 @@ dl.samples
 {
 	padding: 0 0 0 40px;
 }
-dl.samples > dt
+dl.samples >  dt
 {
 	display: list-item;
 	list-style-type: disc;
 	list-style-position: outside;
 	margin: 0 0 3px;
 }
-dl.samples > dd
+dl.samples >  dd
 {
 	margin: 0 0 3px;
 }

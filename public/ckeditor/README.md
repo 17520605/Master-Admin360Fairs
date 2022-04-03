@@ -32,7 +32,7 @@ installation proceeded properly. Take a look at the `samples` directory.
 
 To test your installation, just call the following page at your website:
 
-	http://<your site>/<CKEditor installation path>/samples/index.html
+	http://<your site> /<CKEditor installation path> /samples/index.html
 
 For example:
 
