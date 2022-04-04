@@ -10,7 +10,7 @@
 
                                 <div class="text-center">
                                     <div class="my-3">
-                                        <a href="index.html">
+                                        <a href="#">
                                             <span><img src="{{asset('admin/assets/images/logo/logo_Sgallery.png')}}" alt="" height="48"></span>
                                         </a>
                                     </div>
@@ -36,9 +36,8 @@
                                     <hr>
                                     <div class="form-group text-center">
                                         <button class="btn btn-success btn-block waves-effect waves-light" type="submit"> Đăng nhập </button>
-
                                     </div>
-                                    <div style="width: 100%;text-align: center"><a href="#" class="text-muted mt-2"> 2022 &copy; Design theme by <a href="#">Gallary </a></div>
+                                    <div style="width: 100%;text-align: center"><a href="#" class="text-muted mt-2"> 2022 &copy; <a href="#">Gallary </a></div>
                                     {{-- <a href="pages-recoverpw.html" class="text-muted"><i class="mdi mdi-lock mr-1"></i> Quên mật khẩu?</a> --}}
                                     <section id="message" class='alert alert-danger text-center' style="display: none"></section>
                                 </form>
