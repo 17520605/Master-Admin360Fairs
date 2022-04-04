@@ -15,7 +15,7 @@ class ArticleController extends Controller
 {
     public function index()
     {   
-        $articles = ArticleService::getAll();
+        $articles = \App\Models\Article::where('type', 'system')->get();
         return view('article.index', ['articles'=> $articles]);
     }
 
