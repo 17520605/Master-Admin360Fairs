@@ -115,7 +115,8 @@ class ArticleController extends Controller
         else{
             return [
                 'success' => false,
-                'errors' => 'Thao tác thát bại'
+                'isHidden' => $article->isPublic,
+                'errors' => 'Thao tác thất bại'
             ]; 
         }
     }

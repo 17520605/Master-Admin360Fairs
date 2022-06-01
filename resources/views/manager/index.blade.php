@@ -8,17 +8,17 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Trang chủ</a></li>
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Bài viết</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Tài khoản</a></li>
                                 <li class="breadcrumb-item active">Danh sách</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Quản lý bài viết</h4>
+                        <h4 class="page-title">Quản lý tài khoản</h4>
                     </div>
                 </div>
             </div>
-            <a type="button" href="{{ route('master.get.article.create') }}"
+            <a type="button" href="{{ route('master.get.user.create') }}"
                 class="btn btn-twitter waves-effect waves-light mb-3"><span class="btn-label"> <i
-                        class="fas fa-plus"></i></span> Thêm mới bài viết</a>
+                        class="fas fa-plus"></i></span> Thêm mới tài khoản</a>
             <div class="row">
                 <div class="col-12">
                     <div class="card-box">
@@ -27,40 +27,42 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Tên bài viết</th>
+                                    <th>Tên Tài khoản</th>
                                     <th>Hình ảnh</th>
-                                    <th>Trạng thái</th>
-                                    <th>Người viết</th>
-                                    <th>Ngày tạo</th>
+                                    <th>Email</th>
+                                    <th>Loại Tài Khoản</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(@isset($articles) > 0)
-                                    @php
-                                        $number = 1;
-                                    @endphp
-                                    @foreach ($articles as $article)
-                                    <tr data-article-id='{{$article->id}}'>
+                                @php
+                                    $number = 1;
+                                @endphp
+                                @if(@isset($users) > 0)
+                                    @foreach ($users as $user)
+                                    <tr data-user-id='{{$user->id}}'>
                                         <td>{{$number++}}</td>
                                         <td>
-                                            <h6 href="app-product.html" class="font-weight-bold text-width-500">{{$article->title}}</h6>
+                                            <h6 class="font-weight-bold">{{$user->userinfo->name}}</h6>
                                         </td>
                                         <td>
-                                            <img src="{{$article->banner}}" class="rounded" height="70" width="140" style="object-fit: cover;">
+                                            <img style="width: 80px; height: 80px;border-radius:50%;object-fit: cover " src="{{$user->userinfo->avatar!=null ? $user->userinfo->avatar : '/admin/assets/images/undraw_profile.svg'}}" alt="">
                                         </td>
                                         <td>
-                                            <button onclick="toggleVisiable(this)" class="btn waves-effect waves-light {{$article->isPublic != 0 ?'btn-secondary':'btn-success' }}">{{$article->isPublic != 0 ? 'UnPublic' : 'Public'  }}</button>
+                                            <h6>{{$user->userinfo->email}}</h6>
+                                            <h6>{{$user->userinfo->contact}}</h6>
                                         </td>
                                         <td>
-                                            {{$article->author}}
-                                        </td>
-                                        <td>
-                                            {{$article->created_at}}
+                                            <h6 class="font-weight-bold">{{$user->type}}</h6>
                                         </td>
                                         <td> 
-                                            <a class="btn waves-effect waves-light btn-success" href="{{route('master.get.article.edit', $article->id)}}" ><i class="mdi mdi-pencil-outline"></i></a>
-                                            <button class="btn waves-effect waves-light btn-danger" onclick="openPopupDelete('{{$article->id}}')"><i class="mdi mdi-trash-can"> </i></button>
+                                            @if ($user->type == 'superadmin' && $user->level == 1)
+                                                <button disabled class="btn waves-effect waves-light btn-success" onclick="#"><i class="mdi mdi-pencil-outline"></i></button>
+                                                <button disabled class="btn waves-effect waves-light btn-danger" onclick="#"><i class="mdi mdi-trash-can"> </i></button>
+                                            @else
+                                                <a class="btn waves-effect waves-light btn-success" href="{{route('master.get.user.edit', $user->id)}}" ><i class="mdi mdi-pencil-outline"></i></a>
+                                                <button class="btn waves-effect waves-light btn-danger" onclick="openPopupDelete('{{$user->id}}')"><i class="mdi mdi-trash-can"> </i></button>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
@@ -75,7 +77,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="deleteArticle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <div class="modal fade" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -102,7 +104,7 @@
 
     function openPopupDelete(id) {  
         $('#confirmDeleteBtn').attr('data-id', id);
-        $('#deleteArticle').modal('show');
+        $('#deleteUser').modal('show');
     }
 
     function confirmDelete(target){
@@ -112,14 +114,14 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type: "delete",
-            url: "{{env('APP_URL')}}/articles/" + id,
+            url: "{{env('APP_URL')}}/user/" + id,
             data: "data",
             dataType: "json",
             success: function (res) {
                 if(res.success === true){
-                    $('#deleteArticle').modal('hide');
+                    $('#deleteUser').modal('hide');
                     var table = $('#datatable').DataTable();
-                    var row = $('#datatable').find('tr[data-article-id="'+ id +'"]');
+                    var row = $('#datatable').find('tr[data-user-id="'+ id +'"]');
                     table.row(row).remove().draw();
                     tata.success('Thành công', 'Đã xóa bài viết', {
                         animate: 'slide',
@@ -149,19 +151,21 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type: "post",
-            url: "{{env('APP_URL')}}/articles/" + id + "/toggle-visiable",
+            url: "{{env('APP_URL')}}/user/" + id + "/toggle-visiable",
             dataType: "json",
             success: function (res) {
                 if(res.success === true){
-                    if(res.isHidden == true){
+                    if(res.isHidden){
                         $(target).removeClass('btn-success');
                         $(target).addClass('btn-secondary');
-                        $(target).text('UnPublic');
+                        $(target).find('i').removeClass('fa-eye');
+                        $(target).find('i').addClass('fa-eye-slash');
                     }
                     else{
                         $(target).removeClass('btn-secondary');
                         $(target).addClass('btn-success');
-                        $(target).text('Public');
+                        $(target).find('i').removeClass('fa-eye-slash');
+                        $(target).find('i').addClass('fa-eye');
                     }
 
                     tata.success('Thành công', 'Đã thay đổi thành công', {

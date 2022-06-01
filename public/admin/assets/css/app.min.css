@@ -2864,9 +2864,12 @@ div.hopscotch-bubble .hopscotch-content {
     border: 2px dashed #efefef;
     background-color: transparent;
     border-radius: 6px;
-    color: #ced4da
+    color: #ced4da;
+    height:280px !important;
 }
-
+.dropify-wrapper .dropify-preview .dropify-render img {
+height: 100% !important;
+}
 .dropify-wrapper:hover {
     background-image: linear-gradient(-45deg, #f5f6f8 25%, transparent 25%, transparent 50%, #f5f6f8 50%, #f5f6f8 75%, transparent 75%, transparent)
 }
