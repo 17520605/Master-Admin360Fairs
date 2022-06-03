@@ -47,7 +47,7 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Nội dung bài viết :</label>
                     <div class="col-sm-10">
-                        <textarea name="content" class="form-control" cols="30" rows="3" placeholder="Nội dung"></textarea>
+                        <textarea name="content" id="editor" class="form-control" cols="30" rows="3" placeholder="Nội dung"></textarea>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -80,7 +80,10 @@
 @stop
 @section('script')
     <script>
-        CKEDITOR.replace('content');
+        CKEDITOR.replace( 'editor', {
+            filebrowserBrowseUrl: '../../../admin/assets/plugins/ckfinder/ckfinder.html',
+            filebrowserUploadUrl: '../../../admin/assets/plugins/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
+        } );
     </script>
     <script>
         $('#title_article').on('input', function () {  

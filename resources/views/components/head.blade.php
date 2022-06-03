@@ -33,4 +33,7 @@
     <script src="{{asset('admin/assets/libs/tata/tata.js')}}"></script>
     <script src="{{asset('admin/assets/js/utils.js')}}"></script>
     
+    <script src="{{asset('admin/assets/plugins/ckeditor/ckeditor.js')}}"></script>
+    <script src="{{asset('admin/assets/plugins/ckfinder/ckfinder.js')}}"></script>
+    
 </head>
