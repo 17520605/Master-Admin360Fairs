@@ -27,10 +27,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Tên bài viết</th>
                                     <th>Hình ảnh</th>
+                                    <th>Tên bài viết</th>
                                     <th>Trạng thái</th>
-                                    <th>Người viết</th>
                                     <th>Ngày tạo</th>
                                     <th>Thao tác</th>
                                 </tr>
@@ -44,16 +43,14 @@
                                     <tr data-article-id='{{$article->id}}'>
                                         <td>{{$number++}}</td>
                                         <td>
+                                            <img src="{{$article->banner}}" class="rounded" height="120" width="200" style="object-fit: cover;">
+                                        </td>
+                                        <td>
                                             <h6 href="app-product.html" class="font-weight-bold text-width-500">{{$article->title}}</h6>
+                                            <div class="name-author">{{$article->author}}</div>
                                         </td>
                                         <td>
-                                            <img src="{{$article->banner}}" class="rounded" height="70" width="140" style="object-fit: cover;">
-                                        </td>
-                                        <td>
-                                            <button onclick="toggleVisiable(this)" class="btn waves-effect waves-light {{$article->isPublic != 0 ?'btn-secondary':'btn-success' }}">{{$article->isPublic != 0 ? 'UnPublic' : 'Public'  }}</button>
-                                        </td>
-                                        <td>
-                                            {{$article->author}}
+                                            <input onchange="toggleVisiable(this)" type="checkbox" {{$article->isPublic === 1 ? 'checked=""' : null}} data-plugin="switchery" data-color="#9261c6" data-size="small">
                                         </td>
                                         <td>
                                             {{$article->created_at}}
@@ -153,17 +150,6 @@
             dataType: "json",
             success: function (res) {
                 if(res.success === true){
-                    if(res.isHidden == true){
-                        $(target).removeClass('btn-success');
-                        $(target).addClass('btn-secondary');
-                        $(target).text('UnPublic');
-                    }
-                    else{
-                        $(target).removeClass('btn-secondary');
-                        $(target).addClass('btn-success');
-                        $(target).text('Public');
-                    }
-
                     tata.success('Thành công', 'Đã thay đổi thành công', {
                         animate: 'slide',
                         closeBtn: true,

@@ -34,7 +34,7 @@
                     </li>
                     <li class="menu-title mt-2">Mở rộng</li>
                     <li>
-                        <a href="{{ route('master.get.galary-popular.list-galary-popular')}}">
+                        <a href="{{ route('master.get.gallery')}}">
                             <i class="mdi mdi-star-circle"></i>
                             {{-- <span class="badge badge-danger badge-pill float-right">9</span> --}}
                             <span> Gallary nổi bật</span>
@@ -47,7 +47,12 @@
                             <span> Liên hệ</span>
                         </a>
                     </li>
-
+                    <li>
+                        <a href="{{ route('master.get.setting-upload')}}">
+                            <i class="mdi mdi-folder-settings-variant"></i>
+                            <span> Cấu hình upload </span>
+                        </a>
+                    </li>
                     <li>
                         <a href="{{ route('master.get.setting')}}">
                             <i class="mdi mdi-settings"></i>

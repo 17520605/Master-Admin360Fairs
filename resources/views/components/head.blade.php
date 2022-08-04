@@ -15,7 +15,7 @@
     <link href="{{asset('admin/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bootstrap-stylesheet">
     <link href="{{asset('admin/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('admin/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-stylesheet">
-
+    <link href="{{asset('admin/assets/css/loader.css')}}" rel="stylesheet" type="text/css">
     <!-- Table datatable css -->
     <link href="{{asset('admin/assets/libs/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
     <link href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css" rel="stylesheet">
@@ -28,12 +28,12 @@
     <link href="{{asset('admin/assets/libs/select2/select2.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('admin/assets/libs/tata/tata.css')}}" rel="stylesheet" type="text/css" id="app-stylesheet">
     <link href="{{asset('admin/assets/libs/dropify/dropify.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('admin/assets/libs/switchery/switchery.min.css')}}" rel="stylesheet" type="text/css">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{asset('admin/assets/libs/tata/tata.js')}}"></script>
     <script src="{{asset('admin/assets/js/utils.js')}}"></script>
-    
     <script src="{{asset('admin/assets/plugins/ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('admin/assets/plugins/ckfinder/ckfinder.js')}}"></script>
-    
+
 </head>

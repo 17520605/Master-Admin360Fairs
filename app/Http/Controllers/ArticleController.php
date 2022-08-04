@@ -15,7 +15,7 @@ class ArticleController extends Controller
 {
     public function index()
     {   
-        $articles = \App\Models\Article::where('type', 'system')->get();
+        $articles = \App\Models\Article::where('type', 'system')->orderby('id', 'DESC')->get();
         return view('article.index', ['articles'=> $articles]);
     }
 

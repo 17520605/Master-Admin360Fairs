@@ -37,6 +37,18 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Mật khẩu : <span style="color: red">*</span></label>
+                    <div class="col-sm-10">
+                    <input type="password" class="form-control" id="pasword" name="password" placeholder="Mật khẩu" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Nhập lại Mật khẩu : <span style="color: red">*</span></label>
+                    <div class="col-sm-10">
+                    <input type="password" class="form-control" id="repasword" name="repassword" placeholder="Nhập lại khẩu" required disabled>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Loại tài khoản : <span style="color: red">*</span></label>
                     <div class="col-sm-5">
                         <select name="type" class="form-control mb-3" placeholder="Loại tài khoản" required>
@@ -50,8 +62,8 @@
                     </div> --}}
                 </div>
                 <div class="form-group row mt-3 float-right mr-1">
-                    <button type="submit" class="btn btn-success waves-effect waves-light mr-2">
-                        <span class="btn-label"><i class="mdi mdi-content-save"></i> </span>Lưu
+                    <button type="submit" id="submitForm" class="btn btn-success waves-effect waves-light mr-2" disabled>
+                        <span class="btn-label"><i class="mdi mdi-content-save"></i> </span>Thêm mới
                     </button>
                 </div>
             </form>  
@@ -61,7 +73,33 @@
 @section('script')
 <script>
     $(document).ready(function () {
+        $('#pasword').on('keyup', function() {
+            let password = $('#pasword').val();
+            console.log(password);
+            if(password)
+            {
+                $('#repasword').prop('disabled', false);
+            }
+            else{
+                $('#repasword').prop('disabled', true);
+            }
+        });
+        $("#repasword").on('keyup', function() {
+            var password = $("#pasword").val();
+            var repasword = $("#repasword").val();
+            if (password != repasword)
+            {
+                $("#repasword").css('border', '1px solid #c00')
+            }
+            else if (password === repasword)
+            {
+                $("#repasword").css('border', '1px solid #ced4da');
+                $('#submitForm').prop('disabled', false);
+            }
+        });
+
         $('#createForm').submit(function (e) { 
+            $('#pageLoader').show();
             const data = $(this).serializeArray()
             e.preventDefault();
             $.ajax({
@@ -70,7 +108,13 @@
                 data: data,
                 dataType: "json",
                 success: function (response) {
+                    $('#pageLoader').hide();
                     if(response && response.result === 'ok'){
+                        tata.success('Tạo mới thành công', response.message, {
+                            duration: 5000,
+                            animate: 'slide',
+                            closeBtn: true,
+                        });
                         window.location.href = '/users';
                     }
                     else

@@ -9,50 +9,28 @@
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Trang chủ</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Tài khoản</a></li>
-                                <li class="breadcrumb-item active">Chỉnh sửa tài khoản</li>
+                                <li class="breadcrumb-item active">Chỉnh sửa mật khẩu</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Chỉnh sửa tài khoản</h4>
+                        <h4 class="page-title">Chỉnh sửa mật khẩu</h4>
                     </div>
                 </div>
             </div>
             <form id="editForm">
                 @csrf
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Tên cá nhân / tổ chức : <span style="color: red">*</span></label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Mật khẩu : <span style="color: red">*</span></label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nameEdit" value="{{$profile->name}}" name="name" placeholder="Tên cá nhân hoặc tổ chức" required>
+                    <input type="password" class="form-control" id="pasword" name="password" placeholder="Mật khẩu" required>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email : <span style="color: red">*</span></label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Nhập lại Mật khẩu : <span style="color: red">*</span></label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" id="emailEdit" value="{{$profile->email}}" name="email" placeholder="Email cá nhân hoặc tổ chức" required>
+                    <input type="password" class="form-control" id="repasword" name="repassword" placeholder="Nhập lại khẩu" required>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Số điện thoại :</label>
-                    <div class="col-sm-10">
-                    <input type="text" class="form-control" id="phoneEdit" value="{{$profile->contact}}" name="phone" placeholder="Số điện thoại">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Loại tài khoản : <span style="color: red">*</span></label>
-                    <div class="col-sm-5">
-                        <select name="type" id="typeEdit"  class="form-control mb-3" placeholder="Loại tài khoản" required>
-                            <option value="personal" {{$profile->type == 'personal' ? 'selected' : ''}}>Tài khoản cá nhân</option>
-                            <option value="bussiness" {{$profile->type == 'bussiness' ? 'selected' : ''}}>Tài khoản doanh nghiệp</option>
-                        </select>
-                    </div>
-                    {{-- <label class="col-sm-4 col-form-label" style="text-align: end;">Đã xác thực :</label>
-                    <div class="col-sm-1">
-                        <input type="checkbox" style="width: 30px; height: 30px;" class="form-check-input form-control float-right">
-                    </div> --}}
                 </div>
                 <div class="form-group row mt-3 float-right mr-1">
-                    {{-- <button id="sendEmailBtn" type="button" class="btn btn-secondary waves-effect waves-light mr-2">
-                        <span class="btn-label"><i class="fas fa-envelope"></i></span>Gửi email xác thực
-                    </button> --}}
                     <button type="submit" id="submitForm" disabled class="btn btn-success waves-effect waves-light mr-2">
                         <span class="btn-label"><i class="mdi mdi-content-save"></i> </span>Lưu thay đổi
                     </button>
@@ -64,6 +42,30 @@
 @section('script')
 <script>
     $(document).ready(function () {
+        $('#pasword').on('keyup', function() {
+            let password = $('#pasword').val();
+            console.log(password);
+            if(password)
+            {
+                $('#repasword').prop('disabled', false);
+            }
+            else{
+                $('#repasword').prop('disabled', true);
+            }
+        });
+        $("#repasword").on('keyup', function() {
+            var password = $("#pasword").val();
+            var repasword = $("#repasword").val();
+            if (password != repasword)
+            {
+                $("#repasword").css('border', '1px solid #c00')
+            }
+            else if (password === repasword)
+            {
+                $("#repasword").css('border', '1px solid #ced4da');
+                $('#submitForm').prop('disabled', false);
+            }
+        });
         $('#nameEdit').keyup(function() {
             debugger;
             $('#submitForm').prop('disabled', false);
@@ -82,7 +84,7 @@
             e.preventDefault();
             $.ajax({
                 type: "post",
-                url: "/users/{{$profile->userId}}/save-edit",
+                url: "/users/{{$profile->userId}}/save-password",
                 data: data,
                 dataType: "json",
                 success: function (response) {

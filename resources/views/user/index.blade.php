@@ -31,6 +31,7 @@
                                     <th>Hình ảnh</th>
                                     <th>Email</th>
                                     <th>Loại Tài Khoản</th>
+                                    <th>Trạng Thái</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>
@@ -55,8 +56,12 @@
                                         <td>
                                             <h6 class="font-weight-bold">{{$user->type}}</h6>
                                         </td>
+                                        <td>
+                                            <input onchange="toggleVisiable(this)" type="checkbox" {{$user->isPublic === 1 ? 'checked=""' : null}} data-plugin="switchery" data-color="#9261c6" data-size="small">
+                                        </td>
                                         <td> 
                                             <a class="btn waves-effect waves-light btn-success" href="{{route('master.get.user.edit', $user->id)}}" ><i class="mdi mdi-pencil-outline"></i></a>
+                                            <a class="btn waves-effect waves-light btn-warning" href="{{route('master.get.user.password', $user->id)}}" ><i class="mdi mdi-textbox-password"></i></a>
                                             <button class="btn waves-effect waves-light btn-danger" onclick="openPopupDelete('{{$user->id}}')"><i class="mdi mdi-trash-can"> </i></button>
                                         </td>
                                     </tr>
@@ -109,16 +114,16 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type: "delete",
-            url: "{{env('APP_URL')}}/user/" + id,
+            url: "{{env('APP_URL')}}/users/" + id,
             data: "data",
             dataType: "json",
-            success: function (res) {
+            success: function (res) { 
                 if(res.success === true){
                     $('#deleteUser').modal('hide');
                     var table = $('#datatable').DataTable();
                     var row = $('#datatable').find('tr[data-user-id="'+ id +'"]');
                     table.row(row).remove().draw();
-                    tata.success('Thành công', 'Đã xóa bài viết', {
+                    tata.success('Thành công', 'Đã xóa tài khoản', {
                         animate: 'slide',
                         closeBtn: true,
                     })
@@ -140,29 +145,16 @@
     }
 
     function toggleVisiable(target){
-        let id = $(target).parents('tr').attr('data-article-id');
+        let id = $(target).parents('tr').attr('data-user-id');
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type: "post",
-            url: "{{env('APP_URL')}}/user/" + id + "/toggle-visiable",
+            url: "{{env('APP_URL')}}/users/" + id + "/toggle-visiable",
             dataType: "json",
             success: function (res) {
                 if(res.success === true){
-                    if(res.isHidden){
-                        $(target).removeClass('btn-success');
-                        $(target).addClass('btn-secondary');
-                        $(target).find('i').removeClass('fa-eye');
-                        $(target).find('i').addClass('fa-eye-slash');
-                    }
-                    else{
-                        $(target).removeClass('btn-secondary');
-                        $(target).addClass('btn-success');
-                        $(target).find('i').removeClass('fa-eye-slash');
-                        $(target).find('i').addClass('fa-eye');
-                    }
-
                     tata.success('Thành công', 'Đã thay đổi thành công', {
                         animate: 'slide',
                         closeBtn: true,

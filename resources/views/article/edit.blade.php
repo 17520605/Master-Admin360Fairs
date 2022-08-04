@@ -86,6 +86,7 @@
     CKEDITOR.replace( 'editor', {
         filebrowserBrowseUrl: '../../../admin/assets/plugins/ckfinder/ckfinder.html',
         filebrowserUploadUrl: '../../../admin/assets/plugins/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
+        
     } );
 </script>
   <script>

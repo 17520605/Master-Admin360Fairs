@@ -31,6 +31,7 @@
                                     <th>Hình ảnh</th>
                                     <th>Email</th>
                                     <th>Loại Tài Khoản</th>
+                                    <th>Trạng thái</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>
@@ -55,12 +56,17 @@
                                         <td>
                                             <h6 class="font-weight-bold">{{$user->type}}</h6>
                                         </td>
+                                        <td>
+                                            <input onchange="toggleVisiable(this)" type="checkbox" {{$user->isPublic === 1 ? 'checked=""' : null}} data-plugin="switchery" data-color="#9261c6" data-size="small">
+                                        </td>
                                         <td> 
                                             @if ($user->type == 'superadmin' && $user->level == 1)
-                                                <button disabled class="btn waves-effect waves-light btn-success" onclick="#"><i class="mdi mdi-pencil-outline"></i></button>
-                                                <button disabled class="btn waves-effect waves-light btn-danger" onclick="#"><i class="mdi mdi-trash-can"> </i></button>
+                                            <a class="btn waves-effect waves-light btn-success" href="{{route('master.get.manager.edit', $user->id)}}" ><i class="mdi mdi-pencil-outline"></i></a>
+                                                <a class="btn waves-effect waves-light btn-warning" href="{{route('master.get.manager.password', $user->id)}}" ><i class="mdi mdi-textbox-password"></i></a>
+                                                {{-- <button disabled class="btn waves-effect waves-light btn-danger" onclick="#"><i class="mdi mdi-trash-can"> </i></button> --}}
                                             @else
-                                                <a class="btn waves-effect waves-light btn-success" href="{{route('master.get.user.edit', $user->id)}}" ><i class="mdi mdi-pencil-outline"></i></a>
+                                                <a class="btn waves-effect waves-light btn-success" href="{{route('master.get.manager.edit', $user->id)}}" ><i class="mdi mdi-pencil-outline"></i></a>
+                                                <a class="btn waves-effect waves-light btn-warning" href="{{route('master.get.manager.password', $user->id)}}" ><i class="mdi mdi-textbox-password"></i></a>
                                                 <button class="btn waves-effect waves-light btn-danger" onclick="openPopupDelete('{{$user->id}}')"><i class="mdi mdi-trash-can"> </i></button>
                                             @endif
                                         </td>
@@ -114,7 +120,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type: "delete",
-            url: "{{env('APP_URL')}}/user/" + id,
+            url: "{{env('APP_URL')}}/managerment/" + id,
             data: "data",
             dataType: "json",
             success: function (res) {
@@ -151,7 +157,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type: "post",
-            url: "{{env('APP_URL')}}/user/" + id + "/toggle-visiable",
+            url: "{{env('APP_URL')}}/managerment/" + id + "/toggle-visiable",
             dataType: "json",
             success: function (res) {
                 if(res.success === true){

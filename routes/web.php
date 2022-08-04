@@ -23,6 +23,8 @@
             Route::get('/create', 'UserController@create')->name('master.get.user.create');
             Route::post('/save-create', 'UserController@saveCreate')->name('master.post.user.save-create');
             Route::get('/{id}/edit/', 'UserController@edit')->name('master.get.user.edit');
+            Route::get('/{id}/password/', 'UserController@password')->name('master.get.user.password');
+            Route::post('/{id}/save-password/', 'UserController@savePassword')->name('master.post.user.save-password');
             Route::post('/{id}/save-edit/', 'UserController@saveEdit')->name('master.post.user.save-edit');
             Route::post('/{id}/send-email-verify/', 'UserController@sendEmailVerify')->name('master.post.user.send-email-verify');
             Route::post('/{id}/toggle-visiable', 'UserController@toggleVisiable')->name('master.post.user.toggle-visiable');
@@ -31,14 +33,16 @@
 
         Route::group(['prefix' => 'managerment'], function(){
             Route::get('/', 'ManagerController@index')->name('master.get.manager.list-managers');
-            // Route::get('/guest', 'ManagerController@guest')->name('master.get.user.list-guest');
-            // Route::get('/create', 'ManagerController@create')->name('master.get.user.create');
-            // Route::post('/save-create', 'ManagerController@saveCreate')->name('master.post.user.save-create');
-            // Route::get('/{id}/edit/', 'ManagerController@edit')->name('master.get.user.edit');
-            // Route::post('/{id}/save-edit/', 'ManagerController@saveEdit')->name('master.post.user.save-edit');
-            // Route::post('/{id}/send-email-verify/', 'ManagerController@sendEmailVerify')->name('master.post.user.send-email-verify');
-            // Route::post('/{id}/toggle-visiable', 'ManagerController@toggleVisiable')->name('master.post.user.toggle-visiable');
-            // Route::delete('/{id}/', 'ManagerController@delete')->name('master.delete.user.delete');
+            Route::get('/guest', 'ManagerController@guest')->name('master.get.manager.list-guest');
+            Route::get('/create', 'ManagerController@create')->name('master.get.manager.create');
+            Route::post('/save-create', 'ManagerController@saveCreate')->name('master.post.manager.save-create');
+            Route::get('/{id}/edit/', 'ManagerController@edit')->name('master.get.manager.edit');
+            Route::get('/{id}/password/', 'ManagerController@password')->name('master.get.manager.password');
+            Route::post('/{id}/save-password/', 'ManagerController@savePassword')->name('master.post.manager.save-password');
+            Route::post('/{id}/save-edit/', 'ManagerController@saveEdit')->name('master.post.manager.save-edit');
+            Route::post('/{id}/send-email-verify/', 'ManagerController@sendEmailVerify')->name('master.post.manager.send-email-verify');
+            Route::post('/{id}/toggle-visiable', 'ManagerController@toggleVisiable')->name('master.post.manager.toggle-visiable');
+            Route::delete('/{id}/', 'ManagerController@delete')->name('master.delete.manager.delete');
         });
 
         Route::group(['prefix' => 'contact'], function(){
@@ -53,6 +57,16 @@
             Route::post('/save-videoIntro', 'ProfileController@saveVideoIntro');
             Route::post('/delete-videoIntro', 'ProfileController@deleteVideoIntro');
         });
+        Route::group(['prefix' => 'gallery'], function(){
+            Route::get('/', 'GalleryController@index')->name('master.get.gallery');
+            Route::post('/save-order', 'GalleryController@saveOrder')->name('master.post.gallery.save-order');
+            Route::post('/{id}/toggle-visiable', 'GalleryController@toggleVisiable')->name('master.post.gallery.toggle-visiable');
+        });
+        Route::group(['prefix' => 'setting-upload'], function(){
+            Route::get('/', 'SettingUploadController@index')->name('master.get.setting-upload');
+            Route::post('/{id}/data-upload/{value}', 'SettingUploadController@dataUpload')->name('master.post.setting-upload.data-upload');
+        });
+
 
         Route::group(['prefix' => 'galary'], function(){
             Route::get('/', 'GallaryController@index')->name('master.get.galary-popular.list-galary-popular');

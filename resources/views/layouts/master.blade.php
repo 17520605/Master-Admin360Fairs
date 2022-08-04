@@ -16,8 +16,12 @@
                 <!-- End of Footer -->
             </div>
         </div>
+        <section class="loader" id="pageLoader">
+            <div class="loading" >
+                <span class="loading__anim"></span>
+            </div>
+        </section>
         @include('components.foot')
         @yield('script')
-        
     </body>
 </html>

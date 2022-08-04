@@ -37,6 +37,7 @@ class ManagerController extends Controller
         $name = $request->input('name');
         $phone = $request->input('phone');
         $email = $request->input('email');
+        $password = $request->input('password');
         $type = $request->input('type');
 
         $user = User::where('email', $email)->first();
@@ -51,9 +52,10 @@ class ManagerController extends Controller
             $random = Str::random(45);
             $user = new User;
             $user->email = $email;
-            $user->password = null;
+            $user->password = bcrypt($password);
             $user->level = 40;
             $user->accessToken = $random;
+            $user->isPublic = true;
             $user->isRequiredChangePassword = true;
             $user->type = 'touradmin';
             $user->save();
@@ -66,14 +68,15 @@ class ManagerController extends Controller
             $profile->type = $type;
             $profile->save();
 
+
             $mail = new MailService(
                 [$email],
-                '360fairs. Xác thực tài khoản',
-                'mail.verify',
+                'Sgallery. Xác thực tài khoản',
+                'mail.newUser',
                 [
-                    'name' =>  $name,
+                    'name' => $name,
+                    'password' => $password,
                     'email' => $email,
-                    'token' => $user->accessToken
                 ]
             );
 
@@ -81,19 +84,28 @@ class ManagerController extends Controller
 
             return response()->json([
                 'result' => 'ok',
-                'data' => [
-                    'user' => $user,
-                    'profile' => $profile,
-                ],
+                'success' => true,
+                'message' => 'Tạo tài khoản thành công !'
             ], 200);
         }
-        return redirect()->route('master.get.user.list-users');
+        return redirect()->route('master.get.manager.list-users');
     }
 
     public function edit($id)
     {
         $profile = Profile::where('UserId', $id)->first();
-        return view('manager.edit')->with(['profile' => $profile]);
+        $user = User::where('id', $id)->first();
+        // $password = base64_encode($user->password);
+        // $password = decrypt($password);
+        $profile->password = '123';
+        return view('user.edit')->with(['profile' => $profile]);
+    }
+
+    public function password($id)
+    {
+        $profile = Profile::where('UserId', $id)->first();
+        return view('manager.password')->with(['profile' => $profile]);
+    
     }
 
     public function saveEdit($id, Request $request)
@@ -102,7 +114,6 @@ class ManagerController extends Controller
         $name = $request->input('name');
         $phone = $request->input('phone');
         $email = $request->input('email');
-        $password = $request->input('password');
         $type = $request->input('type');
 
         $user = User::where('id', $userId)->first();
@@ -125,15 +136,30 @@ class ManagerController extends Controller
         ], 200);
     }
 
+    public function savePassword($id, Request $request)
+    {
+        $userId = $id;
+        $password = $request->input('password');
+        $user = User::where('id', $userId)->first();
+        $user->password =  bcrypt($password);
+        $user->save();
+        return response()->json([
+            'result' => 'ok',
+            'data' => [
+                'user' => $user,
+            ],
+        ], 200);
+    }
+
     public function toggleVisiable($id, Request $request)
     {
-        $article = Article::where('id', $id)->first();
-        if(isset($article)){
-            $article->isPublic = !$article->isPublic;
-            $article->save();
+        $user = User::where('id', $id)->first();
+        if(isset($user)){
+            $user->isPublic = !$user->isPublic;
+            $user->save();
             return [
                 'success' => true,
-                'isHidden' => $article->isPublic,
+                'isHidden' => $user->isPublic,
             ]; 
         }
         else{

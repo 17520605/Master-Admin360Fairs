@@ -18,7 +18,6 @@
         <link href="{{asset('admin/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('admin/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-stylesheet">
         <link href="{{asset('admin/assets/libs/tata/tata.css')}}" rel="stylesheet" type="text/css" id="app-stylesheet">
-
         <script src="{{asset('admin/assets/libs/tata/tata.js')}}"></script>
         <script src="{{asset('admin/assets/js/utils.js')}}"></script>
     </head>

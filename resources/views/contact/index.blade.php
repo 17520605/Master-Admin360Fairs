@@ -39,7 +39,16 @@
                                         <td>{{$contact->name}}</td>
                                         <td>{{$contact->email}}</td>
                                         <td>
-                                            <button onclick="toggleVisiable(this)" class="btn btn-xs btnStatusHandle {{ $contact->status != 1 ? 'btn-success' : 'btn-secondary' }}" > {{ $contact->status != 1 ? 'Chưa xữ lý' : 'Đã xữ lý' }}</button>
+                                            @if ($contact->status != 1)
+                                                <button onclick="toggleVisiable(this)" class="btn btn-xs btnStatusHandle {{ $contact->status != 1 ? 'btn-success' : 'btn-secondary' }}" > {{ $contact->status != 1 ? 'Chưa xữ lý' : 'Đã xữ lý' }}</button>
+                                            @else
+                                                <div class="checkbox checkbox-purple checkbox-circle">
+                                                    <input id="checkbox14" type="checkbox" disabled="" checked="">
+                                                    <label for="checkbox14">
+                                                        Đã xử lý
+                                                    </label>
+                                                </div>
+                                            @endif
                                         </td>
                                         <th>{{$contact->content}}</th>
                                         <td>
