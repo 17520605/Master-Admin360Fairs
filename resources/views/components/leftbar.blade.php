@@ -15,14 +15,14 @@
                     <li>
                         <a href="{{ route('master.get.manager.list-managers')}}">
                             <i class="mdi mdi-account-star"></i>
-                            <span> Account </span>
+                            <span> Tài khoản </span>
                         </a>
                     </li>
  
                     <li>
                         <a href="{{ route('master.get.user.list-users')}}">
                             <i class="mdi mdi-account-multiple"></i>
-                            <span> Account Tour</span>
+                            <span> Tài khoản tour</span>
                         </a>
                     </li>
  

@@ -10,6 +10,7 @@ class Profile extends BaseModel {
        'userId',
        'type',
        'avatar',
+       'order',
        'logo',
        'background',
        'name',

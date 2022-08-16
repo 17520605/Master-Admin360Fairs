@@ -18,32 +18,15 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="card-box">
-                        <h3 class="mb-3">Cấu hình dung lượng tải lên storage</h3>
-                        <table id="datatable" class="table table-bordered dt-responsive nowrap"
-                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                            <tbody>
-                                <tr>
-                                    <th class="w-20">Loại </th>
-                                    <th>Tùy chỉnh (dung lượng nhỏ nhất (10MB) - lớn nhất (100MB)</th>
-                                    <th>Tổng</th>
-                                </tr>
-                                @if(@isset($config) > 0)
-                                    @foreach ($config as $conf)
-                                        <tr data-config-id='{{$conf->id}}' data-config-value='{{$conf->value}}'>
-                                            <th class="w-20">{{$conf->type}}</th>
-                                            <td><input onchange="changeValue(this)" type="range" id="range{{$conf->type}}" value="{{$conf->value}}" data-old-value="{{$conf->value}}" min="1" max="100"></td>
-                                            <td class="w-5"><span id="text{{$conf->type}}" class="capacity">{{$conf->value}}</span> MB</td>
-                                        </tr>
-                                    @endforeach
-                                @else
-                                    <tr>
-                                        <td colspan="12">Không có dữ liệu</td>
-                                    </tr>
-                                @endif
-                            </tbody>
-                        </table>
+                    @if(@isset($config) > 0)
+                    @foreach ($config as $conf)
+                    <div class="card-box" data-config-id="{{$conf->id}}">
+                        <h3 class="mb-3">{{$conf->type}} - <span>{{$conf->value}} MB</span> </h3>
+                        <hr>
+                        <input onchange="changeValue(this)" type="range" id="range{{$conf->type}}" value="{{$conf->value}}" data-old-value="{{$conf->value}}" min="1" max="100">
                     </div>
+                    @endforeach
+                    @endif
                 </div>
             </div>
         </div>
@@ -70,7 +53,7 @@
     });
 
     function changeValue(target){
-        let id = $(target).parents('tr').attr('data-config-id');
+        let id = $(target).parents('div').attr('data-config-id');
         let value = $(target).val();
         $.ajax({
             headers: {

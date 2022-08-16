@@ -50,7 +50,16 @@
                                             <div class="name-author">{{$article->author}}</div>
                                         </td>
                                         <td>
-                                            <input onchange="toggleVisiable(this)" type="checkbox" {{$article->isPublic === 1 ? 'checked=""' : null}} data-plugin="switchery" data-color="#9261c6" data-size="small">
+                                            @if ($article->isPublic === 1)
+                                                @php
+                                                    $isPublic = 'checked=""';
+                                                @endphp
+                                            @else
+                                                @php
+                                                    $isPublic = '';
+                                                @endphp
+                                            @endif
+                                            <input onchange="toggleVisiable(this)" type="checkbox" {{$isPublic}} data-plugin="switchery" data-color="#9261c6" data-size="small">
                                         </td>
                                         <td>
                                             {{$article->created_at}}

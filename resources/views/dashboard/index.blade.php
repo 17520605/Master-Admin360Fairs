@@ -23,37 +23,33 @@
 			<div class="row">
 				<div class="col-md-6 col-xl-3">
 					<div class="card-box tilebox-one">
-						<i class="icon-layers float-right m-0 h2 text-muted"></i>
-						<h6 class="text-muted text-uppercase mt-0">Orders</h6>
-						<h3 class="my-3" data-plugin="counterup">1,587</h3>
-						<span class="badge badge-success mr-1"> +11% </span> <span class="text-muted">From previous period</span>
+						<i class="icon-user float-right m-0 h2 text-muted"></i>
+						<h6 class="text-muted text-uppercase mt-0">Thành viên</h6>
+						<h3 class="my-3" data-plugin="counterup">{{$userCount}}</h3>
 					</div>
 				</div>
 
 				<div class="col-md-6 col-xl-3">
 					<div class="card-box tilebox-one">
-						<i class="icon-paypal float-right m-0 h2 text-muted"></i>
-						<h6 class="text-muted text-uppercase mt-0">Revenue</h6>
-						<h3 class="my-3">$<span data-plugin="counterup">46,782</span></h3>
-						<span class="badge badge-danger mr-1"> -29% </span> <span class="text-muted">From previous period</span>
+						<i class="ion ion-ios-cube float-right m-0 h2 text-muted"></i>
+						<h6 class="text-muted text-uppercase mt-0">Tour</h6>
+						<h3 class="my-3"><span data-plugin="counterup">{{$tourCount}}</span></h3>
 					</div>
 				</div>
 
 				<div class="col-md-6 col-xl-3">
 					<div class="card-box tilebox-one">
-						<i class="icon-chart float-right m-0 h2 text-muted"></i>
-						<h6 class="text-muted text-uppercase mt-0">Average Price</h6>
-						<h3 class="my-3">$<span data-plugin="counterup">15.9</span></h3>
-						<span class="badge badge-pink mr-1"> 0% </span> <span class="text-muted">From previous period</span>
+						<i class="ion ion-md-paper float-right m-0 h2 text-muted"></i>
+						<h6 class="text-muted text-uppercase mt-0">Bài viết</h6>
+						<h3 class="my-3"><span data-plugin="counterup">{{$articleCount}}</span></h3>
 					</div>
 				</div>
 
 				<div class="col-md-6 col-xl-3">
 					<div class="card-box tilebox-one">
-						<i class="icon-rocket float-right m-0 h2 text-muted"></i>
-						<h6 class="text-muted text-uppercase mt-0">Product Sold</h6>
-						<h3 class="my-3" data-plugin="counterup">1,890</h3>
-						<span class="badge badge-warning mr-1"> +89% </span> <span class="text-muted">Last year</span>
+						<i class=" ion ion-ios-text float-right m-0 h2 text-muted"></i>
+						<h6 class="text-muted text-uppercase mt-0">Đánh giá</h6>
+						<h3 class="my-3" data-plugin="counterup">{{$contactCount}}</h3>
 					</div>
 				</div>
 			</div>
@@ -116,106 +112,6 @@
 					</div>
 				</div>
 				<!-- end col-->
-			</div>
-			<!-- end row -->
-
-
-			<div class="row">
-				<div class="col-xl-7">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="card-box">
-								<h4 class="header-title mb-3">Sales Statistics</h4>
-
-								<p class="font-weight-semibold mb-3">iMacs <span class="text-danger float-right"><b>78%</b></span></p>
-								<div class="progress" style="height: 10px;">
-									<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="78"></div>
-								</div>
-							</div>
-
-							<div class="card-box">
-								<h4 class="header-title mb-3">Monthly Sales</h4>
-
-								<p class="font-weight-semibold mb-2">Macbooks <span class="text-success float-right"><b>25%</b></span></p>
-								<div class="progress" style="height: 10px;">
-									<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-
-							<div class="card-box">
-								<h4 class="header-title mb-3">Daily Sales</h4>
-
-								<p class="font-weight-semibold mb-2">Mobiles <span class="text-warning float-right"><b>75%</b></span></p>
-								<div class="progress" style="height: 10px;">
-									<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-
-						</div>
-
-					</div>
-				</div>
-				<!-- end col-->
-
-				<div class="col-xl-5">
-					<div class="card-box">
-
-						<h4 class="header-title mb-3">Top Contracts</h4>
-
-						<div class="table-responsive">
-							<table class="table table-bordered table-nowrap mb-0">
-								<thead>
-									<tr>
-										<th>Company</th>
-										<th>Start Date</th>
-										<th>End Date</th>
-										<th>Status</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th class="text-muted">Apple Technology</th>
-										<td>20/02/2014</td>
-										<td>19/02/2020</td>
-										<td><span class="badge badge-success">Paid</span></td>
-									</tr>
-									<tr>
-										<th class="text-muted">Envato Pty Ltd.</th>
-										<td>20/02/2014</td>
-										<td>19/02/2020</td>
-										<td><span class="badge badge-danger">Unpaid</span></td>
-									</tr>
-									<tr>
-										<th class="text-muted">Dribbble LLC.</th>
-										<td>20/02/2014</td>
-										<td>19/02/2020</td>
-										<td><span class="badge badge-success">Paid</span></td>
-									</tr>
-									<tr>
-										<th class="text-muted">Adobe Family</th>
-										<td>20/02/2014</td>
-										<td>19/02/2020</td>
-										<td><span class="badge badge-success">Paid</span></td>
-									</tr>
-									<tr>
-										<th class="text-muted">Apple Technology</th>
-										<td>20/02/2014</td>
-										<td>19/02/2020</td>
-										<td><span class="badge badge-danger">Unpaid</span></td>
-									</tr>
-									<tr>
-										<th class="text-muted">Envato Pty Ltd.</th>
-										<td>20/02/2014</td>
-										<td>19/02/2020</td>
-										<td><span class="badge badge-success">Paid</span></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				<!-- end col-->
-
 			</div>
 			<!-- end row -->
 
