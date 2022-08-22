@@ -49,7 +49,7 @@
                                                 <h6>{{$profile->contact}}</h6>
                                             </td>
                                             <td>
-                                                <input onchange="toggleVisiable(this)" type="checkbox" {{$profile->isPublic === 1 ? 'checked=""' : null}} data-plugin="switchery" data-color="#9261c6" data-size="small">
+                                                <input onchange="toggleVisiable(this)" type="checkbox" {{$profile->isPublic === '1' ? 'checked=""' : null}} data-plugin="switchery" data-color="#9261c6" data-size="small">
                                             </td>
                                             <td> 
                                                 <button disabled class="btn waves-effect waves-light btn-success"><i class="mdi mdi-pencil-outline"> </i></button>

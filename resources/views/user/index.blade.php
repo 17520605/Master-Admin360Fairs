@@ -57,7 +57,7 @@
                                             <h6 class="font-weight-bold">{{$user->type}}</h6>
                                         </td>
                                         <td>
-                                            <input onchange="toggleVisiable(this)" type="checkbox" {{$user->isPublic === 1 ? 'checked=""' : null}} data-plugin="switchery" data-color="#9261c6" data-size="small">
+                                            <input onchange="toggleVisiable(this)" type="checkbox" {{$user->isPublic === '1' ? 'checked=""' : null}} data-plugin="switchery" data-color="#9261c6" data-size="small">
                                         </td>
                                         <td> 
                                             <a class="btn waves-effect waves-light btn-success" href="{{route('master.get.user.edit', $user->id)}}" ><i class="mdi mdi-pencil-outline"></i></a>

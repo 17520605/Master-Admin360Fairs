@@ -57,7 +57,7 @@
                                             <h6 class="font-weight-bold">{{$user->type}}</h6>
                                         </td>
                                         <td>
-                                            <input onchange="toggleVisiable(this)" type="checkbox" {{$user->isPublic === 1 ? 'checked=""' : null}} data-plugin="switchery" data-color="#9261c6" data-size="small">
+                                            <input onchange="toggleVisiable(this)" type="checkbox" {{$user->isPublic === '1' ? 'checked=""' : null}} data-plugin="switchery" data-color="#9261c6" data-size="small">
                                         </td>
                                         <td> 
                                             @if ($user->type == 'superadmin' && $user->level == 1)

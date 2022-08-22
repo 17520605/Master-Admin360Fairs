@@ -50,7 +50,7 @@
                                             <div class="name-author">{{$article->author}}</div>
                                         </td>
                                         <td>
-                                            @if ($article->isPublic === 1)
+                                            @if ($article->isPublic === '1')
                                                 @php
                                                     $isPublic = 'checked=""';
                                                 @endphp
