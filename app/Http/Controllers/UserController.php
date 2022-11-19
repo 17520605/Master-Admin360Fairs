@@ -58,48 +58,50 @@ class UserController extends Controller
             $user->level = 40;
             $user->accessToken = $random;
             $user->isPublic = true;
-            $user->isRequiredChangePassword = true;
+            $user->isRequiredChangePassword = false;
             $user->type = 'touradmin';
-            $user->save();
-
-            $profile = new Profile;
-            $profile->name = $name;
-            $profile->email = $email;
-            $profile->userId = $user->id;
-            $profile->contact = $phone;
-            $profile->type = $type;
-            $profile->save();
-
-
-            $mail = new MailService(
-                [$email],
-                'Sgallery. Xác thực tài khoản',
-                'mail.newUser',
-                [
-                    'name' => $name,
-                    'password' => $password,
-                    'email' => $email,
-                ]
-            );
-
-            $mail->sendMail();
-
-            return response()->json([
-                'result' => 'ok',
-                'success' => true,
-                'message' => 'Tạo tài khoản thành công !'
-            ], 200);
+            $saved = $user->save();
+            if(isset($saved))
+            {
+                $profile = new Profile;
+                $profile->order = 0;
+                $profile->name = $name;
+                $profile->email = $email;
+                $profile->userId = $user->id;
+                $profile->contact = $phone;
+                $profile->type = $type;
+                $savedP = $profile->save();
+                if(isset($savedP))
+                {
+                    return response()->json([
+                        'result' => 'ok',
+                        'message' => "Create new category success"
+                    ], 200);
+                }
+                else{
+                    return response()->json([
+                        'result' => 'fail',
+                        'message' => "Create new category fail"
+                    ], 200);
+                }
+                $mail = new MailService(
+                    [$email],
+                    'Sgallery. Xác thực tài khoản',
+                    'mail.newUser',
+                    [
+                        'name' => $name,
+                        'password' => $password,
+                        'email' => $email,
+                    ]
+                );
+                $mail->sendMail();
+            }
         }
-        return redirect()->route('master.get.user.list-users');
     }
 
     public function edit($id)
     {
         $profile = Profile::where('UserId', $id)->first();
-        $user = User::where('id', $id)->first();
-        // $password = base64_encode($user->password);
-        // $password = decrypt($password);
-        $profile->password = '123';
         return view('user.edit')->with(['profile' => $profile]);
     }
 
@@ -107,7 +109,6 @@ class UserController extends Controller
     {
         $profile = Profile::where('UserId', $id)->first();
         return view('user.password')->with(['profile' => $profile]);
-    
     }
 
     public function saveEdit($id, Request $request)

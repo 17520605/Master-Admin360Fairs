@@ -16,7 +16,7 @@
                     </div>
                 </div>
             </div>
-            <form id="createForm" action="{{route('master.post.user.save-create')}}" method="POST">
+            <form id="createForm">
                 @csrf
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Tên cá nhân / tổ chức : <span style="color: red">*</span></label>
@@ -56,10 +56,6 @@
                             <option value="bussiness">Tài khoản doanh nghiệp</option>
                         </select>
                     </div>
-                    {{-- <label class="col-sm-4 col-form-label" style="text-align: end;">Đã xác thực :</label>
-                    <div class="col-sm-1">
-                        <input type="checkbox" style="width: 30px; height: 30px;" class="form-check-input form-control float-right">
-                    </div> --}}
                 </div>
                 <div class="form-group row mt-3 float-right mr-1">
                     <button type="submit" id="submitForm" class="btn btn-success waves-effect waves-light mr-2" disabled>
