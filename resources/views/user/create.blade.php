@@ -107,7 +107,7 @@
                     $('#pageLoader').hide();
                     if(response && response.result === 'ok'){
                         tata.success('Tạo mới thành công', response.message, {
-                            duration: 5000,
+                            duration: 3000,
                             animate: 'slide',
                             closeBtn: true,
                         });
@@ -116,7 +116,7 @@
                     else
                     if(response.result === 'fail'){
                         tata.warn('Thất bại', response.message, {
-                            duration: 5000,
+                            duration: 3000,
                             animate: 'slide',
                             closeBtn: true,
                         });

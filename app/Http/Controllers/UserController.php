@@ -75,26 +75,26 @@ class UserController extends Controller
                 {
                     return response()->json([
                         'result' => 'ok',
-                        'message' => "Create new category success"
+                        'message' => "Tạo tài khoản thành công"
                     ], 200);
                 }
                 else{
                     return response()->json([
                         'result' => 'fail',
-                        'message' => "Create new category fail"
+                        'message' => "Tạo tài khoản thất bại !"
                     ], 200);
                 }
-                $mail = new MailService(
-                    [$email],
-                    'Sgallery. Xác thực tài khoản',
-                    'mail.newUser',
-                    [
-                        'name' => $name,
-                        'password' => $password,
-                        'email' => $email,
-                    ]
-                );
-                $mail->sendMail();
+                // $mail = new MailService(
+                //     [$email],
+                //     'Sgallery. Xác thực tài khoản',
+                //     'mail.newUser',
+                //     [
+                //         'name' => $name,
+                //         'password' => $password,
+                //         'email' => $email,
+                //     ]
+                // );
+                // $mail->sendMail();
             }
         }
     }
